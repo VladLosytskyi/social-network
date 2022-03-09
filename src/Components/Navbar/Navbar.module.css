@@ -1,0 +1,27 @@
+.nav {
+   margin-right: 15px;
+   padding: 20px;
+   width: 130px;
+   background-color: #F8F8F8;
+   border-radius: 20px;
+}
+
+.item {
+   padding-bottom: 10px;
+}
+
+.item:last-child {
+   padding-top: 20px;
+}
+
+.item a {
+   font-size: 18px;
+   color: #999999;
+   text-decoration: none;
+}
+
+.item .active {
+   font-size: 20px;
+   color: #61DAFB;
+   text-decoration: underline;
+}

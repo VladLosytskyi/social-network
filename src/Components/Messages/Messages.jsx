@@ -1,23 +1,22 @@
 import classes from './Messages.module.css'
 import Chats from './Chats/Chats'
 import Message from './Message/Message'
-import { sendMessageCreator, updateNewMessageTextCreator } from '../../redux/messages-reducer'
 
 const Messages = props => {
 
-  let state = props.store.getState().messagesPage
+  let state = props.messagesPage
 
   let chatsElements = state.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } />)
   let messagesElements = state.messages.map(message => <Message message={ message.message } />)
   let newMessageText = state.newMessageText
 
   let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageCreator())
+    props.sendMessage()
   }
 
   let onNewMessageChange = event => {
     let text = event.target.value
-    props.store.dispatch(updateNewMessageTextCreator(text))
+    props.updateNewMessageText(text)
   }
 
   return (

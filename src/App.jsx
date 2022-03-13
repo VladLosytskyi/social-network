@@ -3,10 +3,10 @@ import './App.css'
 import Header from './Components/Header/Header'
 import Navbar from './Components/Navbar/Navbar'
 import Profile from './Components/Profile/Profile'
-import Messages from './Components/Messages/Messages'
+import MessagesContainer from './Components/Messages/MessagesContainer'
 import { Routes, Route } from 'react-router-dom'
 
-const App = (props) => {
+const App = () => {
   return (
     <div className="app-wrapper">
       <Header />
@@ -15,10 +15,10 @@ const App = (props) => {
         <div className="app-wrapper-container">
           <Routes>
             <Route path="/"
-                   element={ <Profile profilePage={ props.state.profilePage } dispatch={ props.dispatch } /> }
+                   element={ <Profile /> }
             />
             <Route path="/messages/*"
-                   element={ <Messages store={ props.store } /> }
+                   element={ <MessagesContainer /> }
             />
           </Routes>
         </div>

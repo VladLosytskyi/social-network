@@ -20,13 +20,17 @@ let initialState = {
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_NEW_MESSAGE_TEXT:
-      state.newMessageText = action.text
-      return state
+      return {
+        ...state,
+        newMessageText: action.text
+      }
     case SEND_MESSAGE:
       let text = state.newMessageText
-      state.newMessageText = ''
-      state.messages.push({ message: text })
-      return state
+      return {
+        ...state,
+        newMessageText: '',
+        messages: [...state.messages, { message: text }]
+      }
     default:
       return state
   }

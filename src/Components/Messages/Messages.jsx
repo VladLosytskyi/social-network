@@ -6,8 +6,8 @@ const Messages = props => {
 
   let state = props.messagesPage
 
-  let chatsElements = state.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } />)
-  let messagesElements = state.messages.map(message => <Message message={ message.message } />)
+  let chatsElements = state.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } key={ chat.id } />)
+  let messagesElements = state.messages.map(message => <Message message={ message.message } key={ message.id } />)
   let newMessageText = state.newMessageText
 
   let onSendMessageClick = () => {

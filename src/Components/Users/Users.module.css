@@ -39,7 +39,7 @@
    border-radius: 50%;
 }
 
-.follow {
+.blueButton {
    margin-top: 10px;
    padding: 10px 20px;
    color: #fff;
@@ -48,7 +48,7 @@
    border-radius: 20px;
 }
 
-.unfollow {
+.whiteButton {
    margin-top: 10px;
    padding: 10px 20px;
    color: #61DAFB;

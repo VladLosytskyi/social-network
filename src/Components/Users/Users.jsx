@@ -1,91 +1,63 @@
 import React from 'react'
 import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.png'
-import axios from 'axios'
 
-class Users extends React.Component {
+let Users = props => {
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${ this.props.currentPage }&count=${ this.props.pageSize }`
-      )
-      .then( response => {
-        this.props.setUsers(response.data.items)
-        this.props.setTotalUsersCount(response.data.totalCount)
-      } )
+  let pages = []
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i)
   }
 
-  onPageChange = pageNumber => {
-    this.props.setCurrentPage(pageNumber)
-
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${ pageNumber }&count=${ this.props.pageSize }`
-      )
-      .then( response => {
-        this.props.setUsers(response.data.items)
-      } )
-  }
-
-  render() {
-
-    let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i)
-    }
-
-    return (
-      <section>
-        <div className={ classes.pageNumbers }>
-          {
-            pages.map(pageNumber => {
-              return (
-                <span className={
-                        `${ this.props.currentPage === pageNumber && classes.selectedPage} ${ classes.pageNumber }`
-                      }
-                      onClick={() => { this.onPageChange(pageNumber) }}>
-                  { pageNumber }
-                </span>
-              )
-            })
-          }
-        </div>
+  return (
+    <section>
+      <div className={ classes.pageNumbers }>
         {
-          this.props.users.map(user => <div key={ user.id }>
-            <div className={ classes.user }>
-              <div className={ classes.userImage }>
-                <div>
-                  <img src={ user.photos.small != null ? user.photos.small : userAvatar } alt="" className={ classes.avatar } />
-                </div>
-                <div>
-                  {
-                    user.followed
-                      ? <button onClick={ () => this.props.unfollow(user.id) } className={ classes.whiteButton }>
-                          Unfollow
-                        </button>
-                      : <button onClick={ () => this.props.follow(user.id) } className={ classes.blueButton }>
-                          Follow
-                        </button>
-                  }
-                </div>
+          pages.map(pageNumber => {
+            return (
+              <span className={
+                      `${ props.currentPage === pageNumber && classes.selectedPage} ${ classes.pageNumber }`
+                    }
+                    onClick={() => { props.onPageChange(pageNumber) }}>
+                { pageNumber }
+              </span>
+            )
+          })
+        }
+      </div>
+      {
+        props.users.map(user => <div key={ user.id }>
+          <div className={ classes.user }>
+            <div className={ classes.userImage }>
+              <div>
+                <img src={ user.photos.small != null ? user.photos.small : userAvatar } alt="" className={ classes.avatar } />
               </div>
-              <div className={ classes.userInfo }>
-                <div className={ classes.name }>{ user.name }</div>
-                {/*<div>
-                  <div>{ user.location.country },</div>
-                  <div>{ user.location.city }</div>
-                </div>*/}
+              <div>
+                {
+                  user.followed
+                    ? <button onClick={ () => props.unfollow(user.id) } className={ classes.whiteButton }>
+                        Unfollow
+                      </button>
+                    : <button onClick={ () => props.follow(user.id) } className={ classes.blueButton }>
+                        Follow
+                      </button>
+                }
               </div>
             </div>
-            <div className={ classes.separator } />
-          </div>)
-        }
-      </section>
-    )
-  }
+            <div className={ classes.userInfo }>
+              <div className={ classes.name }>{ user.name }</div>
+              {/*<div>
+                <div>{ user.location.country },</div>
+                <div>{ user.location.city }</div>
+              </div>*/}
+            </div>
+          </div>
+          <div className={ classes.separator } />
+        </div>)
+      }
+    </section>
+  )
 }
 
 export default Users

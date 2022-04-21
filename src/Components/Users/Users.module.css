@@ -23,7 +23,15 @@
    display: flex;
    align-items: center;
    max-width: 700px;
-   margin-bottom: 15px;
+   margin: 25px 20px;
+   padding: 20px;
+}
+
+.user:hover {
+   padding: 19px;
+   background-color: #f7f7f7;
+   border: 1px solid #CCC;
+   border-radius: 10px;
 }
 
 .separator {
@@ -31,7 +39,6 @@
    height: 2px;
    background-color: #BBBBBB;
    border-radius: 1px;
-   margin-bottom: 30px;
 }
 
 .userImage {
@@ -41,7 +48,7 @@
 
 .userInfo {
    display: flex;
-   justify-content: space-between;
+   flex-direction: column;
    align-items: center;
    width: 100%;
    border: 1px solid #CCC;
@@ -50,6 +57,7 @@
 }
 
 .name {
+   font-size: 17px;
    font-weight: 500;
 }
 

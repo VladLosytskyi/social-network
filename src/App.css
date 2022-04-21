@@ -9,6 +9,12 @@ body {
    font-weight: 400
 }
 
+a, button {
+   color: #000000;
+   text-decoration: none;
+   cursor: pointer;
+}
+
 .app-wrapper {
    display: flex;
    flex-direction: column;
@@ -26,6 +32,6 @@ body {
    flex-direction: column;
    flex: 1 1 auto;
    padding: 20px;
-   background-color: #f8f8f8;
+   background-color: #fafafa;
    border-radius: 20px;
 }

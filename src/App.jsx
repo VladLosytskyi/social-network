@@ -1,16 +1,16 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Header from './Components/Header/Header'
+import HeaderContainer from './Components/Header/HeaderContainer'
 import Navbar from './Components/Navbar/Navbar'
 import ProfileContainer from './Components/Profile/ProfileContainer'
 import MessagesContainer from './Components/Messages/MessagesContainer'
 import UsersContainer from './Components/Users/UsersContainer'
-import { Route, Routes } from 'react-router-dom'
 
 const App = () => {
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
       <div className="app-wrapper-main">
         <Navbar />
         <div className="app-wrapper-container">

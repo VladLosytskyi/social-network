@@ -1,9 +1,13 @@
 .header {
+   display: flex;
+   justify-content: space-between;
    margin-bottom: 15px;
    padding: 10px;
    background-color: #fafafa;
    border-radius: 20px;
 }
+
+/*--------------------LOGO--------------------*/
 
 .logo {
    display: flex;
@@ -18,5 +22,18 @@
 .logo span {
    font-size: 1.5rem;
    color: #61DAFB
+}
+
+/*--------------------LOGIN--------------------*/
+
+.login {
+   display: flex;
+   align-items: center;
+   margin-right: 10px;
+}
+
+.login a {
+   font-size: 18px;
+   color: #61DAFB;
 }
 

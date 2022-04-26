@@ -2,6 +2,7 @@ import React from 'react'
 import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.png'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 let Users = props => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -37,10 +38,40 @@ let Users = props => {
               <div>
                 {
                   user.followed
-                    ? <button onClick={ () => props.unfollow(user.id) } className={ classes.whiteButton }>
+                    ? <button onClick={ () => {
+
+                      axios
+                        .delete(`https://social-network.samuraijs.com/api/1.0/follow/${ user.id }`, {
+                          withCredentials: true,
+                          headers: {
+                            "API-KEY": "d7d8b2e7-6066-4cde-91e9-656d90847c44"
+                          }
+                        })
+                        .then( response => {
+                          if (response.data.resultCode === 0) {
+                            props.unfollow(user.id)
+                          }
+                        } )
+
+                    } } className={ classes.whiteButton }>
                         Unfollow
                       </button>
-                    : <button onClick={ () => props.follow(user.id) } className={ classes.blueButton }>
+                    : <button onClick={ () => {
+
+                      axios
+                        .post(`https://social-network.samuraijs.com/api/1.0/follow/${ user.id }`, {},  {
+                          withCredentials: true,
+                          headers: {
+                            "API-KEY": "d7d8b2e7-6066-4cde-91e9-656d90847c44"
+                          }
+                        })
+                        .then( response => {
+                          if (response.data.resultCode === 0) {
+                            props.follow(user.id)
+                          }
+                        } )
+
+                    } } className={ classes.blueButton }>
                         Follow
                       </button>
                 }

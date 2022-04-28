@@ -44,7 +44,7 @@ let Users = props => {
                         .delete(`https://social-network.samuraijs.com/api/1.0/follow/${ user.id }`, {
                           withCredentials: true,
                           headers: {
-                            "API-KEY": "d7d8b2e7-6066-4cde-91e9-656d90847c44"
+                            "API-KEY": "514803d4-d50a-4581-9403-b2efec04021f"
                           }
                         })
                         .then( response => {
@@ -62,7 +62,7 @@ let Users = props => {
                         .post(`https://social-network.samuraijs.com/api/1.0/follow/${ user.id }`, {},  {
                           withCredentials: true,
                           headers: {
-                            "API-KEY": "d7d8b2e7-6066-4cde-91e9-656d90847c44"
+                            "API-KEY": "514803d4-d50a-4581-9403-b2efec04021f"
                           }
                         })
                         .then( response => {

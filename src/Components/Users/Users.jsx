@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.png'
-import { usersAPI } from '../../api/api'
+import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 let Users = props => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -40,28 +40,40 @@ let Users = props => {
                   user.followed
                     ? <button onClick={ () => {
 
-                      usersAPI.follow(user.id)
-                        .then( data => {
-                          if (data.resultCode === 0) {
+                      axios
+                        .delete(`https://social-network.samuraijs.com/api/1.0/follow/${ user.id }`, {
+                          withCredentials: true,
+                          headers: {
+                            "API-KEY": "514803d4-d50a-4581-9403-b2efec04021f"
+                          }
+                        })
+                        .then( response => {
+                          if (response.data.resultCode === 0) {
+                            props.unfollow(user.id)
+                          }
+                        } )
+
+                    } } className={ classes.whiteButton }>
+                        Unfollow
+                      </button>
+                    : <button onClick={ () => {
+
+                      axios
+                        .post(`https://social-network.samuraijs.com/api/1.0/follow/${ user.id }`, {},  {
+                          withCredentials: true,
+                          headers: {
+                            "API-KEY": "514803d4-d50a-4581-9403-b2efec04021f"
+                          }
+                        })
+                        .then( response => {
+                          if (response.data.resultCode === 0) {
                             props.follow(user.id)
                           }
                         } )
 
                     } } className={ classes.blueButton }>
-                      Follow
-                    </button>
-                    : <button onClick={ () => {
-
-                      usersAPI.unfollow(user.id)
-                        .then( data => {
-                          if (data.resultCode === 0) {
-                            props.unfollow(user.id)
-                          }
-                        } )
-
-                      } } className={ classes.whiteButton }>
-                      Unfollow
-                    </button>
+                        Follow
+                      </button>
                 }
               </div>
             </div>

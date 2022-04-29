@@ -85,3 +85,14 @@
    border: 1px solid #61DAFB;
    border-radius: 20px;
 }
+
+.blueButton:disabled {
+   color: #bebebe;
+   background-color: #3D92A6;
+   border: 1px solid #45A4BBFF;
+}
+.whiteButton:disabled {
+   color: #3D92A6;
+   background-color: #bebebe;
+   border: 1px solid #45A4BBFF;
+}

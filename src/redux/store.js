@@ -13,7 +13,7 @@ let store = {
       ],
       newPostText: 'it-kamasutra.com'
     },
-    dialogsPage: {
+    messagesPage: {
       dialogs: [
         { id: 1, name: 'Dimych' },
         { id: 2, name: 'Andrew' },
@@ -47,7 +47,7 @@ let store = {
 
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action)
-    this._state.dialogsPage = messagesReducer(this._state.dialogsPage, action)
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
     this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
     this._callSubscriber(this._state)

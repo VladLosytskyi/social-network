@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar/Navbar'
 import ProfileContainer from './Components/Profile/ProfileContainer'
 import MessagesContainer from './Components/Messages/MessagesContainer'
 import UsersContainer from './Components/Users/UsersContainer'
+import Login from './Components/Login/Login'
 
 const App = () => {
   return (
@@ -26,6 +27,9 @@ const App = () => {
             />
             <Route path="/users/"
                    element={ <UsersContainer /> }
+            />
+            <Route path="/login"
+                   element={ <Login /> }
             />
           </Routes>
         </div>

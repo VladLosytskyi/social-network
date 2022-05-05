@@ -4,7 +4,6 @@ import {
   follow,
   unfollow,
   setCurrentPage,
-  toggleFollowingProgress,
   getUsers
 } from '../../redux/users-reducer'
 import Users from './Users'
@@ -55,7 +54,6 @@ const mapDispatchToProps = {
   follow,
   unfollow,
   setCurrentPage,
-  toggleFollowingProgress,
   getUsers
 }
 

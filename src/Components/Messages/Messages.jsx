@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom'
 import classes from './Messages.module.css'
 import Chats from './Chats/Chats'
 import Message from './Message/Message'
@@ -18,6 +19,8 @@ const Messages = props => {
     let text = event.target.value
     props.updateNewMessageText(text)
   }
+
+  if(!props.isAuth) return <Navigate to='/login' />
 
   return (
     <div className={ classes.chats }>

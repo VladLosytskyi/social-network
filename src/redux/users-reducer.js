@@ -66,13 +66,13 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const followSuccess = userId => ({ type: FOLLOW, userId })
-export const unfollowSuccess = userId => ({ type: UNFOLLOW, userId })
-export const setUsers = users => ({ type: SET_USERS, users })
+const followSuccess = userId => ({ type: FOLLOW, userId })
+const unfollowSuccess = userId => ({ type: UNFOLLOW, userId })
+const setUsers = users => ({ type: SET_USERS, users })
+const setTotalUsersCount = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
+const toggleIsFetching = isFetching => ({ type: TOGGLE_IS_FETCHING, isFetching })
+const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 export const setCurrentPage = currentPage => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setTotalUsersCount = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
-export const toggleIsFetching = isFetching => ({ type: TOGGLE_IS_FETCHING, isFetching })
-export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
 export const getUsers = (currentPage, pageSize) => dispatch => {
   dispatch(toggleIsFetching(true))

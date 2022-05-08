@@ -1,9 +1,8 @@
-import { sendMessage, updateNewMessageText } from '../../redux/messages-reducer'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { sendMessage, updateNewMessageText } from '../../redux/messages-reducer'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import Messages from './Messages'
-
-let AuthRedirectComponent = withAuthRedirect(Messages)
 
 const mapStateToProps = state => {
   return {
@@ -12,4 +11,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = { sendMessage, updateNewMessageText }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Messages)

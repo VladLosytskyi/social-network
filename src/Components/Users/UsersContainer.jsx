@@ -1,13 +1,15 @@
 import React from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import Users from './Users'
+import Preloader from '../common/Preloader/Preloader'
 import {
   follow,
   unfollow,
   setCurrentPage,
   getUsers
 } from '../../redux/users-reducer'
-import Users from './Users'
-import Preloader from '../common/Preloader/Preloader'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 
 class UsersContainer extends React.Component {
@@ -57,4 +59,7 @@ const mapDispatchToProps = {
   getUsers
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, mapDispatchToProps)
+)(UsersContainer)

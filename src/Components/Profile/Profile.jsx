@@ -6,7 +6,7 @@ const Profile = props => {
 
   return (
     <section className={ classes.profile }>
-      <ProfileInfo profile={ props.profile } />
+      <ProfileInfo profile={ props.profile } status={ props.status } updateStatus={ props.updateStatus } />
       <MyPostsContainer />
     </section>
   )

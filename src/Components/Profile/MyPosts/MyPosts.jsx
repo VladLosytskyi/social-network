@@ -28,7 +28,7 @@ const MyPosts = props => {
           />
         </div>
         <div>
-          <button onClick={ onAddPost } className={ classes.button }>Add post</button>
+          <button onClick={ onAddPost } className={ classes.blueButton }>Add post</button>
         </div>
       </div>
       <div className={ classes.posts }>

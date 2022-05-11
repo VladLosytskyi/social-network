@@ -1,10 +1,11 @@
 import React from 'react'
+import classes from './ProfileInfo.module.css'
 
 class ProfileStatus extends React.Component {
 
   state = {
     editMode: false,
-    title: 'Yo'
+    status: this.props.status
   }
 
   activateEditMode = () => {
@@ -17,14 +18,38 @@ class ProfileStatus extends React.Component {
     this.setState({
       editMode: false
     })
+    this.props.updateStatus(this.state.status)
+  }
+
+  onStatusChange = event => {
+    this.setState({
+      status: event.currentTarget.value
+    })
   }
 
   render() {
     return (
       <div>
         { this.state.editMode
-            ? <input onBlur={ this.deactivateEditMode } value={ this.props.status } autoFocus={true} />
-            : <span onDoubleClick={ this.activateEditMode }>{ this.props.status }</span> }
+            ? <div className={ classes.status }>
+                <div>
+                  <span className={ classes.blueText }>Status: </span>
+                  <input onChange={ this.onStatusChange }
+                       value={ this.state.status }
+                       autoFocus={ true }
+                       className={ classes.statusInput }
+                  />
+                </div>
+                <button onClick={ this.deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
+              </div>
+            : <div className={ classes.status }>
+                <div>
+                  <span className={ classes.blueText }>Status: </span>
+                  <span>{ this.props.status || 'No status' }</span>
+                </div>
+                <button onClick={ this.activateEditMode } className={ classes.blueButton }>Change Status</button>
+              </div>
+        }
       </div>
     )
   }

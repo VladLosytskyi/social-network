@@ -1,7 +1,31 @@
+.blueText {
+   color: #61DAFB;
+   font-weight: 600;
+}
+
 .profileWallpaper img {
    width: 700px;
 }
 
 .profileDescription {
    padding: 10px;
+}
+
+.statusInput {
+   font-size: 15px;
+}
+
+.blueButton {
+   margin-top: 10px;
+   padding: 10px 20px;
+   color: #fff;
+   background-color: #61DAFB;
+   border: 1px solid #61DAFB;
+   border-radius: 20px;
+}
+
+.blueButton:active {
+   color: #61DAFB;
+   background-color: #fff;
+   border: 1px solid #61DAFB;
 }

@@ -11,12 +11,19 @@
    padding: 10px;
 }
 
+.status {
+   display: inline-flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
 .statusInput {
    font-size: 15px;
 }
 
 .blueButton {
    margin-top: 10px;
+   margin-right: 5px;
    padding: 10px 20px;
    color: #fff;
    background-color: #61DAFB;

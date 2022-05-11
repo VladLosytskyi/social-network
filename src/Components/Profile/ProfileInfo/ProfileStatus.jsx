@@ -21,6 +21,12 @@ class ProfileStatus extends React.Component {
     this.props.updateStatus(this.state.status)
   }
 
+  discardChanges = () => {
+    this.setState({
+      editMode: false
+    })
+  }
+
   onStatusChange = event => {
     this.setState({
       status: event.currentTarget.value
@@ -40,14 +46,17 @@ class ProfileStatus extends React.Component {
                        className={ classes.statusInput }
                   />
                 </div>
-                <button onClick={ this.deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
+                <div>
+                  <button onClick={ this.deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
+                  <button onClick={ this.discardChanges } className={ classes.blueButton }>Discard Changes</button>
+                </div>
               </div>
             : <div className={ classes.status }>
                 <div>
                   <span className={ classes.blueText }>Status: </span>
                   <span>{ this.props.status || 'No status' }</span>
                 </div>
-                <button onClick={ this.activateEditMode } className={ classes.blueButton }>Change Status</button>
+                { this.props.profile.userId === 23367 ? <button onClick={ this.activateEditMode } className={ classes.blueButton }>Change Status</button> : <></> }
               </div>
         }
       </div>

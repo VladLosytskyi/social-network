@@ -64,7 +64,12 @@ class ProfileStatus extends React.Component {
                   <span className={ classes.blueText }>Status: </span>
                   <span>{ this.props.status || 'No status' }</span>
                 </div>
-                { this.props.profile.userId === 23367 ? <button onClick={ this.activateEditMode } className={ classes.blueButton }>Change Status</button> : <></> }
+                { this.props.profile.userId === 23367
+                  ? <button onClick={ this.activateEditMode } className={ classes.blueButton }>
+                      Change Status
+                    </button>
+                  : <></>
+                }
               </div>
         }
       </div>

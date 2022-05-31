@@ -1,4 +1,3 @@
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
 let initialState = {
@@ -13,30 +12,21 @@ let initialState = {
     { message: 'Hi' },
     { message: 'How are you?' },
     { message: 'What do you plan to do today?' }
-  ],
-  newMessageText: ''
+  ]
 }
 
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_NEW_MESSAGE_TEXT:
-      return {
-        ...state,
-        newMessageText: action.text
-      }
     case SEND_MESSAGE:
-      let text = state.newMessageText
       return {
         ...state,
-        newMessageText: '',
-        messages: [...state.messages, { message: text }]
+        messages: [...state.messages, { message: action.newMessageText }]
       }
     default:
       return state
   }
 }
 
-export const sendMessage = () => ({ type: SEND_MESSAGE })
-export const updateNewMessageText = text => ({ type: UPDATE_NEW_MESSAGE_TEXT, text: text })
+export const sendMessage = newMessageText => ({ type: SEND_MESSAGE, newMessageText })
 
 export default messagesReducer

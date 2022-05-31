@@ -1,36 +1,18 @@
-import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
+import MyPostsForm from './MyPostsForm'
 
 const MyPosts = props => {
   let postsElements = props.posts.map(post => <Post message={ post.message } likesCount={ post.likesCount } />)
 
-  let newPostElement = React.createRef()
-
-  let onAddPost = () => {
-    props.addPost()
-  }
-
-  let onPostChange = () => {
-    props.updateNewPostText(newPostElement.current.value)
+  let addPost = values => {
+    props.addPost(values.newPostText)
   }
 
   return (
     <div className={ classes.postsBlock }>
       <h3>My posts</h3>
-      <div>
-        <div>
-          <textarea
-            onChange={ onPostChange }
-            ref={ newPostElement }
-            value={ props.newPostText }
-            placeholder="Enter your post text..."
-          />
-        </div>
-        <div>
-          <button onClick={ onAddPost } className={ classes.blueButton }>Add post</button>
-        </div>
-      </div>
+      <MyPostsForm onSubmit={ addPost } />
       <div className={ classes.posts }>
         { postsElements }
       </div>

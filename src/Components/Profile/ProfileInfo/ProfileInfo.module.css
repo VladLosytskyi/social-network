@@ -1,3 +1,7 @@
+input {
+   padding: 1px 5px;
+}
+
 .blueText {
    color: #61DAFB;
    font-weight: 600;

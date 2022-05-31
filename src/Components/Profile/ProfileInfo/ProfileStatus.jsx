@@ -47,7 +47,7 @@ class ProfileStatus extends React.Component {
         { this.state.editMode
             ? <div className={ classes.status }>
                 <div>
-                  <span className={ classes.blueText }>Status: </span>
+                  <span className={ classes.blueText }>Status:</span>
                   <input onChange={ this.onStatusChange }
                        value={ this.state.status }
                        autoFocus={ true }

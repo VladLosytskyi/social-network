@@ -1,0 +1,12 @@
+.formControl {
+   display: flex;
+   flex-direction: column;
+}
+
+.formControl.error input, .formControl.error textarea {
+   border: 2px solid #ff3759;
+}
+
+.formControl.error span {
+   color: #ff3759;
+}

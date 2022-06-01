@@ -1,5 +1,15 @@
+form {
+   display: flex;
+   flex-direction: column;
+}
+
+input:not(:last-child) {
+   min-width: 200px;
+   border-bottom: 1px solid #61DAFB;
+}
+
 .mt10 {
-   margin-top: 10px;
+   margin-top: 7px;
 }
 
 .rememberMe {

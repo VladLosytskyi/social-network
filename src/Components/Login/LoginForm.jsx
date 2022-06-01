@@ -5,21 +5,21 @@ import { required, maxLengthCreator } from '../../utillities/validators/validato
 
 const validate = [
   required,
-  maxLengthCreator(15)
+  maxLengthCreator(50)
 ]
 
 const LoginForm = props => {
   return (
     <form onSubmit={ props.handleSubmit }>
       <div>
-        <Field component={ Input } name="login" type="text" placeholder="Login" validate={ validate } />
+        <Field component={ Input } name="email" type="text" placeholder="Email" validate={ validate } />
       </div>
       <div className={ classes.mt10 }>
-        <Field component={ Input } name="password" type="text" placeholder="Password" validate={ validate } />
+        <Field component={ Input } name="password" type="password" placeholder="Password" validate={ validate } />
       </div>
       <div className={ `${ classes.rememberMe } ${ classes.mt10 }` }>
-        <Field component={ Input } name="rememberMe" type="checkbox" />
-        <span>Remember me</span>
+        <Field component={ Input } name="rememberMe" type="checkbox" id="rememberMe" />
+        <label htmlFor="rememberMe">Remember me</label>
       </div>
       <div className={ classes.mt10 }>
         <button className={ classes.button }>Login</button>

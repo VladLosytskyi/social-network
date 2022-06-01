@@ -26,14 +26,24 @@
 
 /*--------------------LOGIN--------------------*/
 
+.login a, .loggedIn a {
+   font-size: 18px;
+   color: #61DAFB;
+}
+
 .login {
    display: flex;
    align-items: center;
    margin-right: 10px;
 }
 
-.login a {
-   font-size: 18px;
-   color: #61DAFB;
+.loggedIn {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+
+.userName {
+   margin-right: 20px;
 }
 

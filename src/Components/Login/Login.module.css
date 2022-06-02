@@ -12,6 +12,13 @@ input:not(:last-child) {
    margin-top: 7px;
 }
 
+.error {
+   display: flex;
+   flex-direction: column;
+   margin: 15px 0;
+   color: #ff3759;
+}
+
 .rememberMe {
    display: flex;
    flex-direction: row;

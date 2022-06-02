@@ -10,7 +10,7 @@ class ProfileContainer extends React.Component{
   componentDidMount() {
     let userId = this.props.router.params.userId
     if(!userId) {
-      userId = 23367
+      userId = this.props.authorisedUserId
     }
     this.props.getUserProfile(userId)
     this.props.getStatus(userId)
@@ -45,7 +45,9 @@ function withRouter(Component) {
 const mapStateToProps = state => {
   return {
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorisedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
   }
 }
 const mapDispatchToProps = { getUserProfile, getStatus, updateStatus }

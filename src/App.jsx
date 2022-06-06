@@ -1,7 +1,7 @@
 import React from 'react'
 import { compose } from 'redux'
 import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import './App.css'
+import classes from './App.module.css'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import Navbar from './Components/Navbar/Navbar'
 import ProfileContainer from './Components/Profile/ProfileContainer'
@@ -20,15 +20,19 @@ class App extends React.Component {
 
   render() {
     if(!this.props.initialized){
-      return <Preloader />
+      return (
+        <div className={ classes.preloaderContainer }>
+          <Preloader />
+        </div>
+      )
     }
 
     return (
-      <div className="app-wrapper">
+      <div className={ classes.appWrapper }>
         <HeaderContainer />
-        <div className="app-wrapper-main">
+        <div className={ classes.appWrapperMain }>
           <Navbar />
-          <div className="app-wrapper-container">
+          <div className={ classes.appWrapperContainer }>
             <Routes>
               <Route path="/profile"
                      element={ <ProfileContainer /> }

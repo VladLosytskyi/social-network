@@ -4,6 +4,13 @@ import { connect } from 'react-redux'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
 import {
+  getUsersSelector,
+  getPageSizeSelector,
+  getTotalUsersCountSelector,
+  getCurrentPageSelector,
+  getIsFetchingSelector,
+  getFollowingInProgressSelector } from '../../redux/users-selectors'
+import {
   follow,
   unfollow,
   setCurrentPage,
@@ -44,15 +51,14 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress
+    users: getUsersSelector(state),
+    pageSize: getPageSizeSelector(state),
+    totalUsersCount: getTotalUsersCountSelector(state),
+    currentPage: getCurrentPageSelector(state),
+    isFetching: getIsFetchingSelector(state),
+    followingInProgress: getFollowingInProgressSelector(state)
   }
 }
-
 const mapDispatchToProps = {
   follow,
   unfollow,

@@ -48,23 +48,31 @@ textarea:focus {
    outline: none
 }
 
-.app-wrapper {
+.appWrapper {
    display: flex;
    flex-direction: column;
    margin: 0 auto;
    max-width: 1200px;
 }
 
-.app-wrapper-main {
+.appWrapperMain {
    display: flex;
    justify-content: space-between;
 }
 
-.app-wrapper-container {
+.appWrapperContainer {
    display: flex;
    flex-direction: column;
    flex: 1 1 auto;
    padding: 20px;
    background-color: #fafafa;
    border-radius: 20px;
+}
+
+.preloaderContainer {
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

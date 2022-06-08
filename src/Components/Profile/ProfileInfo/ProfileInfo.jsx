@@ -1,6 +1,6 @@
 import classes from './ProfileInfo.module.css'
 import Preloader from '../../common/Preloader/Preloader'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
 const ProfileInfo = props => {
   return (
@@ -13,10 +13,9 @@ const ProfileInfo = props => {
             <div>
               <span className={ classes.blueText }>Nickname: </span><span>{ props.profile.fullName }</span>
             </div>
-            <ProfileStatus status={ props.status } updateStatus={ props.updateStatus } profile={ props.profile } />
+            <ProfileStatusWithHooks status={ props.status } updateStatus={ props.updateStatus } profile={ props.profile } />
           </div>
       }
-
     </>
   )
 }

@@ -1,9 +1,11 @@
+import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 import MyPostsForm from './MyPostsForm'
 
-const MyPosts = props => {
-  let postsElements = props.posts.map(post => <Post message={ post.message } likesCount={ post.likesCount } />)
+const MyPosts = React.memo(props => {
+  let postsElements =
+    props.posts.map(post => <Post message={ post.message } likesCount={ post.likesCount } key={ post.id } />)
 
   let addPost = values => {
     props.addPost(values.newPostText)
@@ -18,6 +20,6 @@ const MyPosts = props => {
       </div>
     </div>
   )
-}
+})
 
 export default MyPosts

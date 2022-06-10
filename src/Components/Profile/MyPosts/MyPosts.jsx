@@ -5,7 +5,9 @@ import MyPostsForm from './MyPostsForm'
 
 const MyPosts = React.memo(props => {
   let postsElements =
-    props.posts.map(post => <Post message={ post.message } likesCount={ post.likesCount } key={ post.id } />)
+    [...props.posts]
+      .reverse()
+      .map(post => <Post message={ post.message } likesCount={ post.likesCount } key={ post.id } />)
 
   let addPost = values => {
     props.addPost(values.newPostText)

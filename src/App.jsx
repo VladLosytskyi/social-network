@@ -1,5 +1,6 @@
 import React from 'react'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import classes from './App.module.css'
 import HeaderContainer from './Components/Header/HeaderContainer'
@@ -9,7 +10,6 @@ import MessagesContainer from './Components/Messages/MessagesContainer'
 import UsersContainer from './Components/Users/UsersContainer'
 import Login from './Components/Login/Login'
 import Preloader from './Components/common/Preloader/Preloader'
-import { connect } from 'react-redux'
 import { initializeApp } from './redux/app-reducer'
 
 class App extends React.Component {

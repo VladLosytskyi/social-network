@@ -1,16 +1,16 @@
 import classes from './FormsControl.module.css'
 
-const FormControl = ({ input, meta, ...props }) => {
+const FormControl = ({ meta: {touched, error}, children }) => {
 
-  const isError = meta.touched && meta.error
+  const isError = touched && error
 
   return (
     <div className={ `${ classes.formControl } ${ isError ? classes.error : "" }` }>
       <div>
-        { props.children }
+        { children }
       </div>
       <div>
-        { isError ? <span>{ meta.error }</span> : "" }
+        { isError ? <span>{ error }</span> : "" }
       </div>
     </div>
   )

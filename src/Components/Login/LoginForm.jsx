@@ -8,9 +8,9 @@ const validate = [
   maxLengthCreator(50)
 ]
 
-const LoginForm = props => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
-    <form onSubmit={ props.handleSubmit }>
+    <form onSubmit={ handleSubmit }>
       <div>
         <Field component={ Input } name="email" type="text" placeholder="Email" validate={ validate } />
       </div>
@@ -21,9 +21,9 @@ const LoginForm = props => {
         <Field component={ Input } name="rememberMe" type="checkbox" id="rememberMe" />
         <label htmlFor="rememberMe">Remember me</label>
       </div>
-      { props.error
+      { error
         && <div className={ classes.error }>
-            { props.error }
+            { error }
            </div>
       }
       <div className={ classes.mt10 }>

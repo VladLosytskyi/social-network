@@ -1,7 +1,7 @@
 import classes from './../Messages.module.css'
 
-const Message = props => {
-  return <div className={ classes.message }>{ props.message }</div>
+const Message = ({ message }) => {
+  return <div className={ classes.message }>{ message }</div>
 }
 
 export default Message

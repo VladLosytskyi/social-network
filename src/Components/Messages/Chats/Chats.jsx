@@ -1,11 +1,11 @@
 import classes from './../Messages.module.css'
 import { NavLink } from 'react-router-dom'
 
-const Chats = props => {
-  let path = '/messages/' + props.nickname
+const Chats = ({ nickname, name }) => {
+  let path = '/messages/' + nickname
 
   return (
-    <NavLink to={ path } className={ ({ isActive }) => isActive ? classes.active : '' }>{ props.name }</NavLink>
+    <NavLink to={ path } className={ ({ isActive }) => isActive ? classes.active : '' }>{ name }</NavLink>
   )
 }
 

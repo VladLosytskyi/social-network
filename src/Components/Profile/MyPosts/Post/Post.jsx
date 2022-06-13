@@ -1,6 +1,6 @@
 import classes from './Post.module.css'
 
-const Post = props => {
+const Post = ({ message, likesCount }) => {
   return (
     <div className={ classes.post }>
       <img
@@ -10,10 +10,10 @@ const Post = props => {
       />
       <div>
         <div className={ classes.postText }>
-          { props.message }
+          { message }
         </div>
         <div className={ classes.likes }>
-          { props.likesCount }<span> likes</span>
+          { likesCount }<span> likes</span>
         </div>
       </div>
     </div>

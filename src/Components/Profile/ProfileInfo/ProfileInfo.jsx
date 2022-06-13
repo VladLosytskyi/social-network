@@ -2,18 +2,18 @@ import classes from './ProfileInfo.module.css'
 import Preloader from '../../common/Preloader/Preloader'
 import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
-const ProfileInfo = props => {
+const ProfileInfo = ({ profile, status, updateStatus }) => {
   return (
     <>
       {
-        !props.profile
+        !profile
         ? <Preloader />
         : <div className={ classes.profileDescription }>
-            <img src={ props.profile.photos.large } alt="" />
+            <img src={ profile.photos.large } alt="Profile photo" />
             <div>
-              <span className={ classes.blueText }>Nickname: </span><span>{ props.profile.fullName }</span>
+              <span className={ classes.blueText }>Nickname: </span><span>{ profile.fullName }</span>
             </div>
-            <ProfileStatusWithHooks status={ props.status } updateStatus={ props.updateStatus } profile={ props.profile } />
+            <ProfileStatusWithHooks status={ status } updateStatus={ updateStatus } profile={ profile } />
           </div>
       }
     </>

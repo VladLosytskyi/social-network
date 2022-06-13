@@ -4,18 +4,15 @@ import Chats from './Chats/Chats'
 import Message from './Message/Message'
 import AddMessageForm from './AddMessageForm'
 
-const Messages = props => {
-
-  let state = props.messagesPage
-
-  let chatsElements = state.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } key={ chat.id } />)
-  let messagesElements = state.messages.map(message => <Message message={ message.message } key={ message.id } />)
+const Messages = ({ messagesPage, sendMessage, isAuth }) => {
+  let chatsElements = messagesPage.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } key={ chat.id } />)
+  let messagesElements = messagesPage.messages.map(message => <Message message={ message.message } key={ message.id } />)
 
   let addNewMessage = values => {
-    props.sendMessage(values.newMessageText)
+    sendMessage(values.newMessageText)
   }
 
-  if(!props.isAuth) return <Navigate to='/login' />
+  if(!isAuth) return <Navigate to='/login' />
 
   return (
     <div className={ classes.chats }>

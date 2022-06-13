@@ -8,9 +8,9 @@ const validate = [
   maxLengthCreator(100)
 ]
 
-const AddMessageForm = props => {
+const AddMessageForm = ({ handleSubmit }) => {
   return (
-    <form onSubmit={ props.handleSubmit } className={ classes.addMessageForm }>
+    <form onSubmit={ handleSubmit } className={ classes.addMessageForm }>
       <div>
         <Field component={ Textarea }
                name="newMessageText"

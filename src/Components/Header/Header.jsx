@@ -2,7 +2,7 @@ import classes from './Header.module.css'
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
 
-const Header = props => {
+const Header = ({ isAuth, login, logout }) => {
   return (
     <header className={ classes.header }>
       <NavLink to={'/'} className={ classes.logo }>
@@ -11,10 +11,10 @@ const Header = props => {
       </NavLink>
       <div className={ classes.login }>
         {
-          props.isAuth
+          isAuth
             ? <div className={ classes.loggedIn }>
-                <div className={ classes.userName }>{ props.login }</div>
-                <a className={ classes.button } onClick={ props.logout }>Log Out</a>
+                <div className={ classes.userName }>{ login }</div>
+                <a className={ classes.button } onClick={ logout }>Log Out</a>
               </div>
             : <NavLink to={'/login'}>Log In</NavLink> }
       </div>

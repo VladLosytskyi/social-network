@@ -3,7 +3,6 @@ import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.png'
 
 let Users = ({ user, follow, unfollow, followingInProgress }) => {
-  debugger
   return (
     <>
       <div className={ classes.user }>

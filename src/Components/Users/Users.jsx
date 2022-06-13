@@ -2,7 +2,6 @@ import Paginator from '../common/Paginator/Paginator'
 import User from './User'
 
 const Users = props => {
-  debugger
   return (
     <section>
       <Paginator totalUsersCount={ props.totalUsersCount }

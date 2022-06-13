@@ -45,32 +45,29 @@ class ProfileStatus extends React.Component {
     return (
       <div>
         { this.state.editMode
-            ? <div className={ classes.status }>
-                <div>
-                  <span className={ classes.blueText }>Status:</span>
-                  <input onChange={ this.onStatusChange }
-                       value={ this.state.status }
-                       autoFocus={ true }
-                       className={ classes.statusInput }
-                  />
-                </div>
-                <div>
-                  <button onClick={ this.deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
-                  <button onClick={ this.discardChanges } className={ classes.blueButton }>Discard Changes</button>
-                </div>
-              </div>
-            : <div className={ classes.status }>
-                <div>
-                  <span className={ classes.blueText }>Status: </span>
-                  <span>{ this.props.status || 'No status' }</span>
-                </div>
-                { this.props.profile.userId === 23367
-                  ? <button onClick={ this.activateEditMode } className={ classes.blueButton }>
-                      Change Status
-                    </button>
-                  : <></>
-                }
-              </div>
+          ? <div className={ classes.status }>
+            <div>
+              <span className={ classes.blueText }>Status:</span>
+              <input onChange={ this.onStatusChange }
+                     value={ this.state.status }
+                     autoFocus={ true }
+                     className={ classes.statusInput }
+              />
+            </div>
+            <div>
+              <button onClick={ this.deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
+              <button onClick={ this.discardChanges } className={ classes.blueButton }>Discard Changes</button>
+            </div>
+          </div>
+          : <div className={ classes.status }>
+            <div>
+              <span className={ classes.blueText }>Status: </span>
+              { this.props.status || 'No status' }
+            </div>
+            <button onClick={ this.activateEditMode } className={ classes.blueButton }>
+              Change Status
+            </button>
+          </div>
         }
       </div>
     )

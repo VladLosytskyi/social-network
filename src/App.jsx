@@ -1,7 +1,8 @@
 import React from 'react'
 import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { connect, Provider } from 'react-redux'
+import { BrowserRouter, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
+import store from './redux/redux-store'
 import classes from './App.module.css'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import Navbar from './Components/Navbar/Navbar'
@@ -19,7 +20,7 @@ class App extends React.Component {
   }
 
   render() {
-    if(!this.props.initialized){
+    if (!this.props.initialized) {
       return (
         <div className={ classes.preloaderContainer }>
           <Preloader />
@@ -64,11 +65,12 @@ function withRouter(Component) {
     let params = useParams()
     return (
       <Component
-        {...props}
-        router={{ location, navigate, params }}
+        { ...props }
+        router={ { location, navigate, params } }
       />
     )
   }
+
   return ComponentWithRouterProp
 }
 
@@ -77,4 +79,16 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = { initializeApp }
 
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App)
+const AppWithRouter = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App)
+
+const AppContainer = () => {
+  return (
+    <BrowserRouter>
+      <Provider store={ store }>
+        <AppWithRouter />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
+export default AppContainer

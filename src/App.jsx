@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { compose } from 'redux'
 import { connect, Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -6,8 +6,6 @@ import store from './redux/redux-store'
 import classes from './App.module.css'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import Navbar from './Components/Navbar/Navbar'
-import ProfileContainer from './Components/Profile/ProfileContainer'
-import MessagesContainer from './Components/Messages/MessagesContainer'
 import UsersContainer from './Components/Users/UsersContainer'
 import Login from './Components/Login/Login'
 import Preloader from './Components/common/Preloader/Preloader'
@@ -17,27 +15,30 @@ import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-i
 
 library.add(faArrowLeftLong, faArrowRightLong)
 
-class App extends React.Component {
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
+const MessagesContainer = React.lazy(() => import('./Components/Messages/MessagesContainer'))
 
-  componentDidMount() {
-    this.props.initializeApp()
+const App = ({ initializeApp, initialized }) => {
+
+  useEffect(() => {
+    initializeApp()
+  }, [])
+
+  if (!initialized) {
+    return (
+      <div className={ classes.preloaderContainer }>
+        <Preloader />
+      </div>
+    )
   }
 
-  render() {
-    if (!this.props.initialized) {
-      return (
-        <div className={ classes.preloaderContainer }>
-          <Preloader />
-        </div>
-      )
-    }
-
-    return (
-      <div className={ classes.appWrapper }>
-        <HeaderContainer />
-        <div className={ classes.appWrapperMain }>
-          <Navbar />
-          <div className={ classes.appWrapperContainer }>
+  return (
+    <div className={ classes.appWrapper }>
+      <HeaderContainer />
+      <div className={ classes.appWrapperMain }>
+        <Navbar />
+        <div className={ classes.appWrapperContainer }>
+          <Suspense fallback={ <Preloader /> }>
             <Routes>
               <Route path="/profile"
                      element={ <ProfileContainer /> }
@@ -55,11 +56,11 @@ class App extends React.Component {
                      element={ <Login /> }
               />
             </Routes>
-          </div>
+          </Suspense>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 function withRouter(Component) {

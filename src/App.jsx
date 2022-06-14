@@ -12,6 +12,10 @@ import UsersContainer from './Components/Users/UsersContainer'
 import Login from './Components/Login/Login'
 import Preloader from './Components/common/Preloader/Preloader'
 import { initializeApp } from './redux/app-reducer'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faArrowLeftLong, faArrowRightLong)
 
 class App extends React.Component {
 

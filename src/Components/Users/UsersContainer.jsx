@@ -32,7 +32,7 @@ const UsersContainer = (props) => {
 
   return (
     <>
-      { this.props.isFetching
+      { props.isFetching
         ? <Preloader />
         : <Users totalUsersCount={ props.totalUsersCount }
                  pageSize={ props.pageSize }

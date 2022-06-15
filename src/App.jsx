@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense } from 'react'
 import { compose } from 'redux'
 import { connect, Provider } from 'react-redux'
-import { BrowserRouter, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { HashRouter, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import store from './redux/redux-store'
 import classes from './App.module.css'
 import HeaderContainer from './Components/Header/HeaderContainer'
@@ -12,6 +12,7 @@ import Preloader from './Components/common/Preloader/Preloader'
 import { initializeApp } from './redux/app-reducer'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
+import Welcome from './Components/Welcome/Welcome'
 
 library.add(faArrowLeftLong, faArrowRightLong)
 
@@ -40,6 +41,9 @@ const App = ({ initializeApp, initialized }) => {
         <div className={ classes.appWrapperContainer }>
           <Suspense fallback={ <Preloader /> }>
             <Routes>
+              <Route path="/"
+                     element={ <Welcome /> }
+              />
               <Route path="/profile"
                      element={ <ProfileContainer /> }
               />
@@ -88,11 +92,11 @@ const AppWithRouter = compose(withRouter, connect(mapStateToProps, mapDispatchTo
 
 const AppContainer = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={ store }>
         <AppWithRouter />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

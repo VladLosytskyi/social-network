@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { getUserProfile, getStatus, updateStatus } from '../../redux/profile-reducer'
+import { getUserProfile, getStatus, updateStatus, postUserAvatar } from '../../redux/profile-reducer'
 import Profile from './Profile'
 
 const ProfileContainer = props => {
@@ -16,13 +16,14 @@ const ProfileContainer = props => {
     }
     props.getUserProfile(userId)
     props.getStatus(userId)
-  }, [])
+  }, [props.router.params.userId])
 
   return (
-    <Profile { ...props }
-             profile={ props.profile }
+    <Profile profile={ props.profile }
+             authorisedUserId={ props.authorisedUserId }
              status={ props.status }
              updateStatus={ props.updateStatus }
+             postUserAvatar={ props.postUserAvatar }
     />
   )
 }
@@ -51,7 +52,7 @@ const mapStateToProps = state => {
     isAuth: state.auth.isAuth
   }
 }
-const mapDispatchToProps = { getUserProfile, getStatus, updateStatus }
+const mapDispatchToProps = { getUserProfile, getStatus, updateStatus, postUserAvatar }
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

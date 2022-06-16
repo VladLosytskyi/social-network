@@ -7,16 +7,38 @@ input {
    font-weight: 600;
 }
 
-.profileWallpaper img {
-   width: 700px;
-}
-
-.profileDescription {
-   display: inline-block;
-   width: 50%;
-   padding: 10px;
+.profileInfo {
+   width: 500px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding: 15px;
    border: 1px solid #CCC;
    border-radius: 10px;
+}
+
+.userAvatarContainer {
+   display: flex;
+   flex-direction: column;
+}
+
+.userAvatar {
+   width: 150px;
+   height: 150px;
+   object-fit: cover;
+   border-radius: 50%;
+}
+
+.setUserAvatar {
+   display: inline-block;
+}
+
+input[type=file] {
+   display: none;
+}
+
+.profileData {
+   margin-left: 30px;
 }
 
 .status {
@@ -37,6 +59,7 @@ input {
    background-color: #61DAFB;
    border: 1px solid #61DAFB;
    border-radius: 20px;
+   cursor: pointer;
 }
 
 .blueButton:active {

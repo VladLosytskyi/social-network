@@ -12,10 +12,10 @@ const LoginForm = ({ handleSubmit, error }) => {
   return (
     <form onSubmit={ handleSubmit }>
       <div>
-        <Field component={ Input } name="email" type="text" placeholder="Email" validate={ validate } />
+        <Field component={ Input } name="email" type="text" placeholder="Email" validate={ validate } className={ classes.input } />
       </div>
       <div className={ classes.mt10 }>
-        <Field component={ Input } name="password" type="password" placeholder="Password" validate={ validate } />
+        <Field component={ Input } name="password" type="password" placeholder="Password" validate={ validate } className={ classes.input } />
       </div>
       <div className={ `${ classes.rememberMe } ${ classes.mt10 }` }>
         <Field component={ Input } name="rememberMe" type="checkbox" id="rememberMe" />

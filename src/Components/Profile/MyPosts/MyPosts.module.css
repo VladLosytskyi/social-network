@@ -17,6 +17,7 @@ textarea {
    background-color: #61DAFB;
    border: 1px solid #61DAFB;
    border-radius: 20px;
+   cursor: pointer;
 }
 
 .blueButton:active {

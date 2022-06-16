@@ -3,9 +3,9 @@ form {
    flex-direction: column;
 }
 
-input:not(:last-child) {
-   min-width: 200px;
-   border-bottom: 1px solid #61DAFB;
+.input {
+   min-width: 250px;
+   max-width: max-content;
 }
 
 .mt10 {

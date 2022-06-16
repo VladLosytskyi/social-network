@@ -3,6 +3,7 @@ import { profileAPI } from '../api/api'
 const ADD_POST = 'social-network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE'
 const SET_STATUS = 'social-network/profile/SET_STATUS'
+const SET_USER_AVATAR = 'social-network/profile/SET_USER_AVATAR'
 
 let initialState = {
   posts: [
@@ -33,6 +34,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_STATUS: {
       return { ...state, status: action.status }
     }
+    case SET_USER_AVATAR: {
+      return { ...state, profile: { ...state.profile, photos: action.userAvatar } }
+    }
     default: {
       return state
     }
@@ -43,6 +47,7 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = newPostText => ({ type: ADD_POST, newPostText })
 const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile })
 const setStatus = status => ({ type: SET_STATUS, status })
+const setUserAvatar = userAvatar => ({ type: SET_USER_AVATAR, userAvatar })
 
 export const getUserProfile = userId => async (dispatch) => {
   const data = await profileAPI.getProfile(userId)
@@ -56,6 +61,12 @@ export const updateStatus = status => async (dispatch) => {
   const data = await profileAPI.updateStatus(status)
   if (data.resultCode === 0) {
     dispatch(setStatus(status))
+  }
+}
+export const postUserAvatar = userAvatar => async (dispatch) => {
+  const data = await profileAPI.postUserAvatar(userAvatar)
+  if (data.resultCode === 0) {
+    dispatch(setUserAvatar(data.data.photos))
   }
 }
 

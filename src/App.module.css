@@ -16,18 +16,28 @@ a, button {
    cursor: pointer;
 }
 
-input {
+input[type=text],
+input[type=email],
+input[type=password] {
    background-color: #fafafa;
-   padding: 10px;
+   font-family: 'Montserrat', sans-serif;
+   padding: 5px 2px;
    border: none;
    border-bottom: 2px solid #CCC;
-   transition: border .5s ease;
    outline: none;
+   transition: border .5s ease;
 }
 
-input:focus {
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
    border-bottom: 2px solid #61DAFB;
    outline: none
+}
+
+input[type=checkbox] {
+   cursor: pointer;
+
 }
 
 input:-webkit-autofill {
@@ -45,7 +55,7 @@ textarea {
 
 textarea:focus {
    border: 2px solid #61DAFB;
-   outline: none
+   outline: none;
 }
 
 .appWrapper {

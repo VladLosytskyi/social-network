@@ -12,6 +12,12 @@ form {
    margin-top: 7px;
 }
 
+.rememberMe {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+
 .error {
    display: flex;
    flex-direction: column;
@@ -20,10 +26,13 @@ form {
    color: #ff3759;
 }
 
-.rememberMe {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
+.captcha img {
+   margin-top: 20px;
+   width: 250px;
+}
+
+.captcha input {
+   width: 250px;
 }
 
 .button {

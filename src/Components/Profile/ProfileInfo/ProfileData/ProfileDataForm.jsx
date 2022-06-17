@@ -47,7 +47,7 @@ const ProfileDataForm = ({ contacts, discardChanges, handleSubmit, error }) => {
                     <Field component={ Input }
                            name={ `contacts.${ key }` }
                            id={ key }
-                           type="text"
+                           type="url"
                            placeholder={ key }/>
                   </div>
                 )

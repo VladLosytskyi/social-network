@@ -8,7 +8,7 @@ const validate = [
   maxLengthCreator(50)
 ]
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, captchaUrl, error }) => {
   return (
     <form onSubmit={ handleSubmit }>
       <div>
@@ -36,6 +36,17 @@ const LoginForm = ({ handleSubmit, error }) => {
       { error &&
         <div className={ classes.error }>
           { error }
+        </div>
+      }
+
+      { captchaUrl &&
+        <div  className={ classes.captcha }>
+          <img src={ captchaUrl } alt="Captcha" />
+          <Field component={ Input }
+                 name="captcha"
+                 type="text"
+                 placeholder="Type symbols from the image"
+                 validate={ validate } />
         </div>
       }
       <div className={ classes.mt10 }>

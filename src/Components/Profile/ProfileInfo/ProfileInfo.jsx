@@ -1,13 +1,25 @@
+import { useState } from 'react'
 import classes from './ProfileInfo.module.css'
 import userAvatar from '../../../assets/images/userAvatar.png'
 import Preloader from '../../common/Preloader/Preloader'
-import ProfileStatusWithHooks from './ProfileStatusWithHooks'
+import ProfileStatusWithHooks from './ProfileData/ProfileStatusWithHooks'
+import ProfileData from './ProfileData/ProfileData'
+import ProfileDataForm from './ProfileData/ProfileDataForm'
 
-const ProfileInfo = ({ profile, authorisedUserId, status, updateStatus, postUserAvatar }) => {
+const ProfileInfo = ({ profile, status, updateProfile, updateStatus, postUserAvatar, isOwner }) => {
+
+  const [editMode, setEditMode] = useState(false)
+
   const onUserAvatarSelected = event => {
     if (event.target.files.length) {
       postUserAvatar(event.target.files[0])
     }
+  }
+
+  const onSubmit = formData => {
+    updateProfile(formData).then(() => {
+      setEditMode(false)
+    })
   }
 
   return (
@@ -18,24 +30,31 @@ const ProfileInfo = ({ profile, authorisedUserId, status, updateStatus, postUser
           : <div className={ classes.profileInfo }>
             <div className={ classes.userAvatarContainer }>
               <img src={ profile.photos.large || userAvatar } className={ classes.userAvatar } alt="Profile photo" />
-              { profile.userId === authorisedUserId &&
-                <label className={ `${classes.setUserAvatar} ${classes.blueButton}` } onChange={ onUserAvatarSelected }>
+              { isOwner &&
+                <label className={ `${ classes.setUserAvatar } ${ classes.blueButton }` }>
                   <input type="file"
                          accept="image/png, image/jpg, image/gif, image/jpeg"
-                         onChange={ onUserAvatarSelected } />Change Avatar
+                         onChange={ onUserAvatarSelected } />
+                  <span>Change Avatar</span>
                 </label> }
             </div>
-            <div className={ classes.profileData }>
-              <span className={ classes.blueText }>Nickname: </span><span>{ profile.fullName }</span>
-              <ProfileStatusWithHooks status={ status }
-                                      updateStatus={ updateStatus }
-                                      userId={ profile.userId }
-                                      authorisedUserId={ authorisedUserId } />
-            </div>
+            <ProfileStatusWithHooks status={ status }
+                                    updateStatus={ updateStatus }
+                                    isOwner={ isOwner } />
+            { editMode
+              ? <ProfileDataForm initialValues={ profile }
+                                 contacts={ profile.contacts }
+                                 discardChanges={ () => setEditMode(false) }
+                                 onSubmit={ onSubmit } />
+              : <ProfileData profile={ profile }
+                             isOwner={ isOwner }
+                             activateEditMode={ () => setEditMode(true) } />
+            }
           </div>
       }
     </>
   )
 }
+
 
 export default ProfileInfo

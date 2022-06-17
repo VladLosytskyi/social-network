@@ -1,5 +1,5 @@
-input {
-   padding: 1px 5px;
+.mr5 {
+   margin-right: 5px;
 }
 
 .blueText {
@@ -8,9 +8,10 @@ input {
 }
 
 .profileInfo {
-   width: 500px;
+   width: 300px;
+   margin-right: 50px;
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    align-items: center;
    padding: 15px;
    border: 1px solid #CCC;
@@ -20,6 +21,7 @@ input {
 .userAvatarContainer {
    display: flex;
    flex-direction: column;
+   align-items: center;
 }
 
 .userAvatar {
@@ -37,12 +39,22 @@ input[type=file] {
    display: none;
 }
 
+.profileDataContainer {
+   display: flex;
+   align-items: center;
+}
+
 .profileData {
-   margin-left: 30px;
+   width: 220px;
+   margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
 .status {
-   display: inline-flex;
+   margin-top: 20px;
+   display: flex;
    flex-direction: column;
    justify-content: center;
 }
@@ -51,15 +63,77 @@ input[type=file] {
    font-size: 15px;
 }
 
-.blueButton {
-   margin-top: 10px;
+.fieldsContainer {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.fieldContainer {
+   width: 220px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: space-between;
+   margin-bottom: 5px;
+}
+
+.fieldContainer label {
    margin-right: 5px;
-   padding: 10px 20px;
+}
+
+.fieldContainer textarea {
+   height: auto;
+   width: 200px;
+}
+
+.contact {
+   padding-left: 15px;
+}
+
+.contact input {
+   height: 15px;
+   font-size: 14px;
+   padding-top: 0;
+   margin-bottom: 15px;
+}
+
+.contact a {
+   text-decoration: underline;
+   transition: color .5s ease;
+}
+
+.contact a:hover {
+   color: #61DAFB;
+}
+
+.error {
+   /*margin: 15px 0 0;*/
+   text-align: center;
+   color: #ff3759;
+}
+
+.buttonsContainer {
+   width: 300px;
+   display: flex;
+   justify-content: center;
+}
+
+.blueButton {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 10px;
+   padding: 10px 17px;
+   cursor: pointer;
+   font-size: 14px;
+   font-family: 'Montserrat', sans-serif;
    color: #fff;
    background-color: #61DAFB;
    border: 1px solid #61DAFB;
    border-radius: 20px;
-   cursor: pointer;
 }
 
 .blueButton:active {

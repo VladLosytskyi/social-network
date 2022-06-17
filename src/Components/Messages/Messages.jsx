@@ -5,10 +5,10 @@ import Message from './Message/Message'
 import AddMessageForm from './AddMessageForm'
 
 const Messages = ({ messagesPage, sendMessage, isAuth }) => {
-  let chatsElements = messagesPage.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } key={ chat.id } />)
-  let messagesElements = messagesPage.messages.map(message => <Message message={ message.message } key={ message.id } />)
+  const chatsElements = messagesPage.chats.map(chat => <Chats name={ chat.name } nickname={ chat.nickname } key={ chat.id } />)
+  const messagesElements = messagesPage.messages.map(message => <Message message={ message.message } key={ message.id } />)
 
-  let addNewMessage = values => {
+  const addNewMessage = values => {
     sendMessage(values.newMessageText)
   }
 

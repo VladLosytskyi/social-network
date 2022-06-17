@@ -1,11 +1,12 @@
 import { profileAPI } from '../api/api'
+import { stopSubmit } from 'redux-form'
 
 const ADD_POST = 'social-network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE'
 const SET_STATUS = 'social-network/profile/SET_STATUS'
 const SET_USER_AVATAR = 'social-network/profile/SET_USER_AVATAR'
 
-let initialState = {
+const initialState = {
   posts: [
     { message: 'Hi, how are you?', likesCount: 12 },
     { message: 'It\'s my second post', likesCount: 2 },
@@ -56,6 +57,17 @@ export const getUserProfile = userId => async (dispatch) => {
 export const getStatus = userId => async (dispatch) => {
   const data = await profileAPI.getStatus(userId)
   dispatch(setStatus(data))
+}
+export const updateProfile = profile => async (dispatch, getState) => {
+  const userId = getState().auth.userId
+  const data = await profileAPI.updateProfile(profile)
+  if (data.resultCode === 0) {
+    dispatch(getUserProfile(userId))
+  } else {
+    const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
+    dispatch(stopSubmit('edit-profile-data', { _error: message }))
+    return Promise.reject(message)
+  }
 }
 export const updateStatus = status => async (dispatch) => {
   const data = await profileAPI.updateStatus(status)

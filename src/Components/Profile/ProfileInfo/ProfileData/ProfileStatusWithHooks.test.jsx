@@ -11,7 +11,7 @@ describe('ProfileStatus Component Test', () => {
   test('after creation span should be displayed', () => {
     const component = create(<ProfileStatus status="Test" />)
     const root = component.root
-    let span = root.findByType('span')
+    const span = root.findByType('span')
     expect(span).not.toBeNull()
   })
 
@@ -19,7 +19,7 @@ describe('ProfileStatus Component Test', () => {
     const component = create(<ProfileStatus status="Test" />)
     const root = component.root
     expect(() => {
-      let input = root.findByType('input')
+      const input = root.findByType('input')
     }).toThrow()
   })
 

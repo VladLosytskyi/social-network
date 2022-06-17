@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import classes from './ProfileInfo.module.css'
+import classes from '../ProfileInfo.module.css'
 
 const ProfileStatusWithHooks = props => {
 
-  let [editMode, setEditMode] = useState(false)
-  let [status, setStatus] = useState(props.status)
+  const [editMode, setEditMode] = useState(false)
+  const [status, setStatus] = useState(props.status)
 
   useEffect(() => {
     setStatus(props.status)
@@ -14,7 +14,7 @@ const ProfileStatusWithHooks = props => {
     setEditMode(true)
   }
 
-  const deactivateEditMode = () => {
+  const saveChanges = () => {
     setEditMode(false)
     props.updateStatus(status)
   }
@@ -29,7 +29,7 @@ const ProfileStatusWithHooks = props => {
 
   return (
     <div>
-      { props.userId === props.authorisedUserId
+      { props.isOwner
         ? <>{ editMode
           ? <div className={ classes.status }>
             <div>
@@ -41,8 +41,8 @@ const ProfileStatusWithHooks = props => {
                      className={ classes.statusInput }
               />
             </div>
-            <div>
-              <button onClick={ deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
+            <div className={ classes.buttonsContainer }>
+              <button onClick={ saveChanges } className={ classes.blueButton } style={ { marginRight: '10px' } }>Save Changes</button>
               <button onClick={ discardChanges } className={ classes.blueButton }>Discard Changes</button>
             </div>
           </div>
@@ -52,7 +52,7 @@ const ProfileStatusWithHooks = props => {
               <span>{ props.status || 'No status' }</span>
             </div>
             <button onClick={ activateEditMode } className={ classes.blueButton }>
-              Change Status
+              <span>Change Status</span>
             </button>
           </div>
         }</>

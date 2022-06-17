@@ -1,6 +1,6 @@
 const SEND_MESSAGE = 'social-network/message/SEND_MESSAGE'
 
-let initialState = {
+const initialState = {
   chats: [
     { name: 'Andrew', nickname: '@Andrew' },
     { name: 'Ivan', nickname: '@Ivan' },

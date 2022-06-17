@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.png'
 
-let Users = ({ user, follow, unfollow, followingInProgress }) => {
+const Users = ({ user, follow, unfollow, followingInProgress }) => {
   return (
     <>
       <div className={ classes.user }>

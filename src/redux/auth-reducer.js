@@ -3,7 +3,7 @@ import { stopSubmit } from 'redux-form'
 
 const SET_AUTH_USER_DATA = 'social-network/auth/SET_AUTH_USER_DATA'
 
-let initialState = {
+const initialState = {
   userId: null,
   email: null,
   login: null,
@@ -30,7 +30,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 export const getAuthUserData = () => async (dispatch) => {
   const data = await authAPI.me()
   if (data.resultCode === 0) {
-    let { id, email, login } = data.data
+    const { id, email, login } = data.data
     dispatch(setAuthUserData(id, email, login, true))
   }
 }
@@ -40,7 +40,7 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
   if (data.resultCode === 0) {
     dispatch(getAuthUserData())
   } else {
-    let message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
+    const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
     dispatch(stopSubmit('login', { _error: message }))
   }
 }

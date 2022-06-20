@@ -21,7 +21,7 @@ const ProfileData = ({ profile, isOwner, activateEditMode }) => {
             { profile.lookingForAJobDescription || 'No Skills' }
           </div> }
         <div>
-          <span className={ classes.blueText }>Contacts:</span>
+          <span className={ `${ classes.blueText } ${ classes.mr5 }` }>Contacts:</span>
           { Object.keys(profile.contacts)
             .filter(key => profile.contacts[key])
             .map(key => {

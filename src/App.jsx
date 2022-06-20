@@ -23,6 +23,10 @@ const App = ({ initializeApp, initialized }) => {
 
   useEffect(() => {
     initializeApp()
+    window.addEventListener("unhandledrejection", promiseRejectionEvent => alert(promiseRejectionEvent))
+    return () => {
+      window.removeEventListener("unhandledrejection", promiseRejectionEvent => alert(promiseRejectionEvent))
+    }
   }, [])
 
   if (!initialized) {

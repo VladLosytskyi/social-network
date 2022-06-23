@@ -6,14 +6,14 @@ const SET_AUTH_USER_DATA = 'social-network/auth/SET_AUTH_USER_DATA'
 const SET_CAPTCHA_URL = 'social-network/auth/SET_CAPTCHA_URL'
 
 
-export type InitialStateType = {
+interface AuthState {
   userId: number | null,
   email: string | null,
   login: string | null,
   isAuth: boolean,
   captchaUrl: string | null
 }
-const initialState: InitialStateType = {
+const initialState: AuthState = {
   userId: null,
   email: null,
   login: null,
@@ -22,7 +22,7 @@ const initialState: InitialStateType = {
 }
 
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: any): AuthState => {
   switch (action.type) {
     case SET_AUTH_USER_DATA: {
       return { ...state, ...action.payload }
@@ -37,21 +37,20 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
 }
 
 
-type SetAuthUserDataActionPayloadType = {
+interface SetAuthUserDataActionPayload {
   userId: number | null,
   email: string | null,
   login: string | null,
   isAuth: boolean
 }
-type SetAuthUserDataActionType = { type: typeof SET_AUTH_USER_DATA, payload: SetAuthUserDataActionPayloadType }
-export const setAuthUserData =
-  (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => ({
-    type: SET_AUTH_USER_DATA,
-    payload: { userId, email, login, isAuth }
-  })
+interface SetAuthUserDataAction { type: typeof SET_AUTH_USER_DATA, payload: SetAuthUserDataActionPayload }
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataAction => ({
+  type: SET_AUTH_USER_DATA,
+  payload: { userId, email, login, isAuth }
+})
 
-type SetCaptchaUrlCaptchaUrl = { type: typeof SET_CAPTCHA_URL, captchaUrl: string }
-export const setCaptchaUrl = (captchaUrl: string): SetCaptchaUrlCaptchaUrl => ({ type: SET_CAPTCHA_URL, captchaUrl })
+interface SetCaptchaCaptchaUrlAction { type: typeof SET_CAPTCHA_URL, captchaUrl: string }
+export const setCaptchaUrl = (captchaUrl: string): SetCaptchaCaptchaUrlAction => ({ type: SET_CAPTCHA_URL, captchaUrl })
 
 
 export const getAuthUserData = () => async (dispatch: any) => {

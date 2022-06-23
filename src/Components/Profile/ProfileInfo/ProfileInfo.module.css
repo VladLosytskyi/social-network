@@ -8,6 +8,7 @@
 }
 
 .profileInfo {
+   height: min-content;
    width: 300px;
    margin-right: 50px;
    display: flex;

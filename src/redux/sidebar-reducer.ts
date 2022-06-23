@@ -1,8 +1,8 @@
-export type InitialStateType = {}
-const initialState: InitialStateType = {}
+interface SidebarState {}
+const initialState: SidebarState = {}
 
 
-const sidebarReducer = (state = initialState): InitialStateType => {
+const sidebarReducer = (state = initialState): SidebarState => {
   return state
 }
 

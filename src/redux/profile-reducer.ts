@@ -1,6 +1,6 @@
 import { profileAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { PostType, PhotosType, ProfileType } from '../types/types'
+import { IPost, IPhotos, IProfile } from '../types/types'
 
 
 const ADD_POST = 'social-network/profile/ADD-POST'
@@ -9,12 +9,12 @@ const SET_STATUS = 'social-network/profile/SET_STATUS'
 const SET_USER_AVATAR = 'social-network/profile/SET_USER_AVATAR'
 
 
-export type InitialStateType = {
-  posts: PostType[],
-  profile: null | ProfileType,
+interface ProfileState {
+  posts: IPost[],
+  profile: null | IProfile,
   status: string
 }
-const initialState: InitialStateType = {
+const initialState: ProfileState = {
   posts: [
     { message: 'Hi, how are you?', likesCount: 12 },
     { message: 'It\'s my second post', likesCount: 2 },
@@ -25,7 +25,7 @@ const initialState: InitialStateType = {
 }
 
 
-const profileReducer = (state = initialState, action: any) => {
+const profileReducer = (state = initialState, action: any): ProfileState => {
   switch (action.type) {
     case ADD_POST: {
       let newPost = {
@@ -53,17 +53,17 @@ const profileReducer = (state = initialState, action: any) => {
 }
 
 
-type AddPostActionType = { type: typeof ADD_POST, newPostText: string }
-export const addPost = (newPostText: string): AddPostActionType => ({ type: ADD_POST, newPostText })
+interface AddPostAction { type: typeof ADD_POST, newPostText: string }
+export const addPost = (newPostText: string): AddPostAction => ({ type: ADD_POST, newPostText })
 
-type SetUserProfileActionType = { type: typeof SET_USER_PROFILE, profile: ProfileType }
-const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({ type: SET_USER_PROFILE, profile })
+interface SetUserProfileAction { type: typeof SET_USER_PROFILE, profile: IProfile }
+const setUserProfile = (profile: IProfile): SetUserProfileAction => ({ type: SET_USER_PROFILE, profile })
 
-type SetStatusActionType = { type: typeof SET_STATUS, status: string }
-const setStatus = (status: string): SetStatusActionType => ({ type: SET_STATUS, status })
+interface SetStatusAction { type: typeof SET_STATUS, status: string }
+const setStatus = (status: string): SetStatusAction => ({ type: SET_STATUS, status })
 
-type SetUserAvatarActionType = { type: typeof SET_USER_AVATAR, userAvatar: PhotosType }
-const setUserAvatar = (userAvatar: PhotosType): SetUserAvatarActionType => ({ type: SET_USER_AVATAR, userAvatar })
+interface SetUserAvatarAction { type: typeof SET_USER_AVATAR, userAvatar: IPhotos }
+const setUserAvatar = (userAvatar: IPhotos): SetUserAvatarAction => ({ type: SET_USER_AVATAR, userAvatar })
 
 
 export const getUserProfile = (userId: string) => async (dispatch: any) => {
@@ -76,7 +76,7 @@ export const getStatus = (userId: string) => async (dispatch: any) => {
   dispatch(setStatus(data))
 }
 
-export const updateProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
+export const updateProfile = (profile: IProfile) => async (dispatch: any, getState: any) => {
   const userId = getState().auth.userId
   const data = await profileAPI.updateProfile(profile)
   if (data.resultCode === 0){
@@ -95,7 +95,7 @@ export const updateStatus = (status: string) => async (dispatch: any) => {
   }
 }
 
-export const postUserAvatar = (userAvatar: PhotosType) => async (dispatch: any) => {
+export const postUserAvatar = (userAvatar: IPhotos) => async (dispatch: any) => {
   const data = await profileAPI.postUserAvatar(userAvatar)
   if (data.resultCode === 0){
     dispatch(setUserAvatar(data.data.photos))

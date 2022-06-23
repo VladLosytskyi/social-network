@@ -4,13 +4,13 @@ import { getAuthUserData } from './auth-reducer'
 const SET_INITIALIZE = 'social-network/app/SET_INITIALIZE'
 
 
-export type InitialStateType = { initialized: boolean }
-const initialState: InitialStateType = {
+interface AppState { initialized: boolean }
+const initialState: AppState = {
   initialized: false
 }
 
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+const appReducer = (state = initialState, action: any): AppState => {
   switch (action.type) {
     case SET_INITIALIZE: {
       return { ...state, initialized: true }
@@ -22,8 +22,8 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
 }
 
 
-type SetInitializeActionType = { type: typeof SET_INITIALIZE }
-export const setInitialize = (): SetInitializeActionType => ({ type: SET_INITIALIZE })
+interface SetInitializeAction { type: typeof SET_INITIALIZE }
+export const setInitialize = (): SetInitializeAction => ({ type: SET_INITIALIZE })
 
 
 export const initializeApp = () => (dispatch: any) => {

@@ -10,11 +10,7 @@ import UsersContainer from './Components/Users/UsersContainer'
 import Login from './Components/Login/Login'
 import Preloader from './Components/common/Preloader/Preloader'
 import { initializeApp } from './redux/app-reducer'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
 import Welcome from './Components/Welcome/Welcome'
-
-library.add(faArrowLeftLong, faArrowRightLong)
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
 const MessagesContainer = React.lazy(() => import('./Components/Messages/MessagesContainer'))

@@ -1,77 +1,68 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import classes from '../ProfileInfo.module.css'
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = props => {
+  const [editMode, setEditMode] = useState(false)
+  const [status, setStatus] = useState(props.status)
 
-  state = {
-    editMode: false,
-    status: this.props.status
+  useEffect(() => {
+    setStatus(props.status)
+  }, [props.status])
+
+  const activateEditMode = () => {
+    setEditMode(true)
   }
 
-  activateEditMode = () => {
-    this.setState({
-      editMode: true
-    })
+  const saveChanges = () => {
+    setEditMode(false)
+    props.updateStatus(status)
   }
 
-  deactivateEditMode = () => {
-    this.setState({
-      editMode: false
-    })
-    this.props.updateStatus(this.state.status)
+  const discardChanges = () => {
+    setEditMode(false)
   }
 
-  discardChanges = () => {
-    this.setState({
-      editMode: false
-    })
+  const onStatusChange = event => {
+    setStatus(event.currentTarget.value)
   }
 
-  onStatusChange = event => {
-    this.setState({
-      status: event.currentTarget.value
-    })
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.status !== this.props.status) {
-      this.setState({
-        status: this.props.status
-      })
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        { this.state.editMode
+  return (
+    <div>
+      { props.isOwner
+        ? <>{ editMode
           ? <div className={ classes.status }>
             <div>
               <span className={ classes.blueText }>Status:</span>
-              <input onChange={ this.onStatusChange }
-                     value={ this.state.status }
+              <input type="text"
+                     onChange={ onStatusChange }
+                     value={ status }
                      autoFocus={ true }
                      className={ classes.statusInput }
               />
             </div>
-            <div>
-              <button onClick={ this.deactivateEditMode } className={ classes.blueButton }>Save Changes</button>
-              <button onClick={ this.discardChanges } className={ classes.blueButton }>Discard Changes</button>
+            <div className={ classes.buttonsContainer }>
+              <button onClick={ saveChanges } className={ classes.blueButton } style={ { marginRight: '10px' } }>Save Changes</button>
+              <button onClick={ discardChanges } className={ classes.blueButton }>Discard Changes</button>
             </div>
           </div>
           : <div className={ classes.status }>
             <div>
               <span className={ classes.blueText }>Status: </span>
-              { this.props.status || 'No status' }
+              <span>{ props.status || 'No status' }</span>
             </div>
-            <button onClick={ this.activateEditMode } className={ classes.blueButton }>
-              Change Status
+            <button onClick={ activateEditMode } className={ classes.blueButton }>
+              <span>Change Status</span>
             </button>
           </div>
-        }
-      </div>
-    )
-  }
+        }</>
+        : <div className={ classes.status }>
+          <div>
+            <span className={ classes.blueText }>Status: </span>
+            <span>{ props.status || 'No status' }</span>
+          </div>
+        </div> }
+    </div>
+  )
 }
 
 export default ProfileStatus

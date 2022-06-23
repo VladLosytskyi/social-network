@@ -2,7 +2,7 @@ import { useState } from 'react'
 import classes from './ProfileInfo.module.css'
 import userAvatar from '../../../assets/images/userAvatar.png'
 import Preloader from '../../common/Preloader/Preloader'
-import ProfileStatusWithHooks from './ProfileData/ProfileStatusWithHooks'
+import ProfileStatus from './ProfileData/ProfileStatus'
 import ProfileData from './ProfileData/ProfileData'
 import ProfileDataForm from './ProfileData/ProfileDataForm'
 
@@ -38,9 +38,9 @@ const ProfileInfo = ({ profile, status, updateProfile, updateStatus, postUserAva
                   <span>Change Avatar</span>
                 </label> }
             </div>
-            <ProfileStatusWithHooks status={ status }
-                                    updateStatus={ updateStatus }
-                                    isOwner={ isOwner } />
+            <ProfileStatus status={ status }
+                           updateStatus={ updateStatus }
+                           isOwner={ isOwner } />
             { editMode
               ? <ProfileDataForm initialValues={ profile }
                                  contacts={ profile.contacts }

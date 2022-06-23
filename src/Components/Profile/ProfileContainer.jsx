@@ -45,14 +45,12 @@ function withRouter(Component) {
   return ComponentWithRouterProp
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorisedUserId: state.auth.userId,
     isAuth: state.auth.isAuth
-  }
-}
+})
 const mapDispatchToProps = { getUserProfile, getStatus, updateProfile, updateStatus, postUserAvatar }
 
 export default compose(

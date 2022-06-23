@@ -11,12 +11,10 @@ const HeaderContainer = ({ getAuthUserData, ...props }) => {
   return <Header { ...props } />
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuth: state.auth.isAuth,
-    login: state.auth.login
-  }
-}
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth,
+  login: state.auth.login
+})
 const mapDispatchToProps = { getAuthUserData, logout }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer)

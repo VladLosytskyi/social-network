@@ -2,8 +2,8 @@ import { FC, useEffect } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Users from './Users'
-import { RootState } from '../../redux/redux-store'
-import { IUser } from '../../types/types'
+import { RootState } from '../../redux/store'
+import { IUser } from '../../types/users'
 import Preloader from '../common/Preloader/Preloader'
 import {
   getUsersSelector,

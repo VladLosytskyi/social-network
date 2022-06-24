@@ -1,19 +1,19 @@
-import { profileAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
-import { IPost, IPhotos, IProfile } from '../types/types'
+import { profileAPI } from '../api/api'
+import { AppDispatch, AppThunk, RootState } from './store'
+import {
+  ProfileState,
+  ProfileActionTypes,
+  AddPostAction,
+  SetUserProfileAction,
+  SetStatusAction,
+  SetUserAvatarAction,
+  IPhotos,
+  IProfile,
+  ProfileActions
+} from '../types/profile'
 
 
-const ADD_POST = 'social-network/profile/ADD-POST'
-const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE'
-const SET_STATUS = 'social-network/profile/SET_STATUS'
-const SET_USER_AVATAR = 'social-network/profile/SET_USER_AVATAR'
-
-
-interface ProfileState {
-  posts: IPost[],
-  profile: null | IProfile,
-  status: string
-}
 const initialState: ProfileState = {
   posts: [
     { message: 'Hi, how are you?', likesCount: 12 },
@@ -25,9 +25,9 @@ const initialState: ProfileState = {
 }
 
 
-const profileReducer = (state = initialState, action: any): ProfileState => {
+const profileReducer = (state = initialState, action: ProfileActions): ProfileState => {
   switch (action.type) {
-    case ADD_POST: {
+    case ProfileActionTypes.ADD_POST: {
       let newPost = {
         message: action.newPostText,
         likesCount: 0
@@ -37,13 +37,13 @@ const profileReducer = (state = initialState, action: any): ProfileState => {
         posts: [...state.posts, newPost],
       }
     }
-    case SET_USER_PROFILE: {
+    case ProfileActionTypes.SET_USER_PROFILE: {
       return { ...state, profile: action.profile }
     }
-    case SET_STATUS: {
+    case ProfileActionTypes.SET_STATUS: {
       return { ...state, status: action.status }
     }
-    case SET_USER_AVATAR: {
+    case ProfileActionTypes.SET_USER_AVATAR: {
       return { ...state, profile: { ...state.profile, photos: action.userAvatar } }
     }
     default: {
@@ -53,49 +53,44 @@ const profileReducer = (state = initialState, action: any): ProfileState => {
 }
 
 
-interface AddPostAction { type: typeof ADD_POST, newPostText: string }
-export const addPost = (newPostText: string): AddPostAction => ({ type: ADD_POST, newPostText })
+export const addPost = (newPostText: string): AddPostAction => ({ type: ProfileActionTypes.ADD_POST, newPostText })
+const setUserProfile = (profile: IProfile): SetUserProfileAction => ({
+  type: ProfileActionTypes.SET_USER_PROFILE,
+  profile
+})
+const setStatus = (status: string): SetStatusAction => ({ type: ProfileActionTypes.SET_STATUS, status })
+const setUserAvatar = (userAvatar: IPhotos): SetUserAvatarAction => ({
+  type: ProfileActionTypes.SET_USER_AVATAR,
+  userAvatar
+})
 
-interface SetUserProfileAction { type: typeof SET_USER_PROFILE, profile: IProfile }
-const setUserProfile = (profile: IProfile): SetUserProfileAction => ({ type: SET_USER_PROFILE, profile })
 
-interface SetStatusAction { type: typeof SET_STATUS, status: string }
-const setStatus = (status: string): SetStatusAction => ({ type: SET_STATUS, status })
-
-interface SetUserAvatarAction { type: typeof SET_USER_AVATAR, userAvatar: IPhotos }
-const setUserAvatar = (userAvatar: IPhotos): SetUserAvatarAction => ({ type: SET_USER_AVATAR, userAvatar })
-
-
-export const getUserProfile = (userId: string) => async (dispatch: any) => {
+export const getUserProfile = (userId: number) => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getProfile(userId)
   dispatch(setUserProfile(data))
 }
-
-export const getStatus = (userId: string) => async (dispatch: any) => {
+export const getStatus = (userId: string) => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getStatus(userId)
   dispatch(setStatus(data))
 }
-
-export const updateProfile = (profile: IProfile) => async (dispatch: any, getState: any) => {
+export const updateProfile = (profile: IProfile): AppThunk => async (dispatch, getState: () => RootState) => {
   const userId = getState().auth.userId
   const data = await profileAPI.updateProfile(profile)
   if (data.resultCode === 0){
-    dispatch(getUserProfile(userId))
+    await dispatch(getUserProfile(userId))
   } else {
     const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
-    dispatch(stopSubmit('edit-profile-data', { _error: message }))
+    await dispatch(stopSubmit('edit-profile-data', { _error: message }))
     return Promise.reject(message)
   }
 }
-
-export const updateStatus = (status: string) => async (dispatch: any) => {
+export const updateStatus = (status: string): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.updateStatus(status)
   if (data.resultCode === 0){
     dispatch(setStatus(status))
   }
 }
-
-export const postUserAvatar = (userAvatar: IPhotos) => async (dispatch: any) => {
+export const postUserAvatar = (userAvatar: IPhotos): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.postUserAvatar(userAvatar)
   if (data.resultCode === 0){
     dispatch(setUserAvatar(data.data.photos))

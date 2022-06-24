@@ -1,12 +1,10 @@
-const SEND_MESSAGE = 'social-network/message/SEND_MESSAGE'
+import {
+  MessagesState,
+  MessagesActionTypes,
+  SendMessageAction,
+  MessagesActions, } from '../types/messages'
 
 
-interface IChat { name: string, nickname: string }
-interface IMessage { message: string }
-interface MessagesState {
-  chats: IChat[],
-  messages: IMessage[]
-}
 const initialState: MessagesState = {
   chats: [
     { name: 'Andrew', nickname: '@Andrew' },
@@ -23,9 +21,9 @@ const initialState: MessagesState = {
 }
 
 
-const messagesReducer = (state = initialState, action: any): MessagesState => {
+const messagesReducer = (state = initialState, action: MessagesActions): MessagesState => {
   switch (action.type) {
-    case SEND_MESSAGE:
+    case MessagesActionTypes.SEND_MESSAGE:
       return {
         ...state,
         messages: [...state.messages, { message: action.newMessageText }]
@@ -36,8 +34,10 @@ const messagesReducer = (state = initialState, action: any): MessagesState => {
 }
 
 
-interface SendMessageAction { type: typeof SEND_MESSAGE, newMessageText: string }
-export const sendMessage = (newMessageText: string): SendMessageAction => ({ type: SEND_MESSAGE, newMessageText })
+export const sendMessage = (newMessageText: string): SendMessageAction => ({
+  type: MessagesActionTypes.SEND_MESSAGE,
+  newMessageText
+})
 
 
 export default messagesReducer

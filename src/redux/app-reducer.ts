@@ -1,10 +1,7 @@
+import { AppActionsTypes, AppState, SetInitializeAction } from '../types/app'
 import { getAuthUserData } from './auth-reducer'
 
 
-const SET_INITIALIZE = 'social-network/app/SET_INITIALIZE'
-
-
-interface AppState { initialized: boolean }
 const initialState: AppState = {
   initialized: false
 }
@@ -12,7 +9,7 @@ const initialState: AppState = {
 
 const appReducer = (state = initialState, action: any): AppState => {
   switch (action.type) {
-    case SET_INITIALIZE: {
+    case AppActionsTypes.SET_INITIALIZE: {
       return { ...state, initialized: true }
     }
     default: {
@@ -22,8 +19,7 @@ const appReducer = (state = initialState, action: any): AppState => {
 }
 
 
-interface SetInitializeAction { type: typeof SET_INITIALIZE }
-export const setInitialize = (): SetInitializeAction => ({ type: SET_INITIALIZE })
+export const setInitialize = (): SetInitializeAction => ({ type: AppActionsTypes.SET_INITIALIZE })
 
 
 export const initializeApp = () => (dispatch: any) => {

@@ -1,8 +1,8 @@
 export interface AuthState {
-  userId: number | null,
-  email: string | null,
-  login: string | null,
-  isAuth: boolean,
+  userId: number | null
+  email: string | null
+  login: string | null
+  isAuth: boolean
   captchaUrl: string | null
 }
 
@@ -12,19 +12,19 @@ export enum AuthActionTypes {
 }
 
 interface SetAuthUserDataActionPayload {
-  userId: number | null,
-  email: string | null,
-  login: string | null,
+  userId: number | null
+  email: string | null
+  login: string | null
   isAuth: boolean
 }
 
 export interface SetAuthUserDataAction {
-  type: AuthActionTypes.SET_AUTH_USER_DATA,
+  type: AuthActionTypes.SET_AUTH_USER_DATA
   payload: SetAuthUserDataActionPayload
 }
 
 export interface SetCaptchaCaptchaUrlAction {
-  type: AuthActionTypes.SET_CAPTCHA_URL,
+  type: AuthActionTypes.SET_CAPTCHA_URL
   captchaUrl: string
 }
 

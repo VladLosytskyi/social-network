@@ -2,27 +2,23 @@ import React, { useEffect, Suspense } from 'react'
 import { compose } from 'redux'
 import { connect, Provider } from 'react-redux'
 import { HashRouter, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import store from './redux/redux-store'
+import store from './redux/store'
 import classes from './App.module.css'
-import HeaderContainer from './Components/Header/HeaderContainer'
-import Navbar from './Components/Navbar/Navbar'
-import UsersContainer from './Components/Users/UsersContainer'
-import Login from './Components/Login/Login'
-import Preloader from './Components/common/Preloader/Preloader'
+import HeaderContainer from './components/Header/HeaderContainer'
+import Navbar from './components/Navbar/Navbar'
+import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
+import Preloader from './components/common/Preloader/Preloader'
 import { initializeApp } from './redux/app-reducer'
-import Welcome from './Components/Welcome/Welcome'
+import Welcome from './components/Welcome/Welcome'
 
-const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
-const MessagesContainer = React.lazy(() => import('./Components/Messages/MessagesContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const MessagesContainer = React.lazy(() => import('./components/Messages/MessagesContainer'))
 
 const App = ({ initializeApp, initialized }) => {
 
   useEffect(() => {
     initializeApp()
-    window.addEventListener("unhandledrejection", promiseRejectionEvent => alert(promiseRejectionEvent))
-    return () => {
-      window.removeEventListener("unhandledrejection", promiseRejectionEvent => alert(promiseRejectionEvent))
-    }
   }, [])
 
   if (!initialized) {

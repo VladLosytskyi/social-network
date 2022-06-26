@@ -1,22 +1,25 @@
 import { useEffect } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getUserProfile, getStatus, updateProfile, updateStatus, postUserAvatar } from '../../redux/profile-reducer'
 import Profile from './Profile'
 
 const ProfileContainer = props => {
+  const navigate = useNavigate()
+  const params = useParams()
+
   useEffect(() => {
-    let userId = props.router.params.userId
+    let userId = params.userId
     if (!userId) {
       userId = props.authorisedUserId
       if (!userId) {
-        props.history.push('/login')
+        navigate('/login')
       }
     }
     props.getUserProfile(userId)
     props.getStatus(userId)
-  }, [props.router.params.userId])
+  }, [params.userId])
 
   return (
     <Profile profile={ props.profile }
@@ -24,25 +27,9 @@ const ProfileContainer = props => {
              updateProfile={ props.updateProfile }
              updateStatus={ props.updateStatus }
              postUserAvatar={ props.postUserAvatar }
-             isOwner={ !props.router.params.userId }
+             isOwner={ !params.userId }
     />
   )
-}
-
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation()
-    let navigate = useNavigate()
-    let params = useParams()
-    return (
-      <Component
-        { ...props }
-        router={ { location, navigate, params } }
-      />
-    )
-  }
-
-  return ComponentWithRouterProp
 }
 
 const mapStateToProps = state => ({
@@ -54,6 +41,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { getUserProfile, getStatus, updateProfile, updateStatus, postUserAvatar }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withRouter
+  connect(mapStateToProps, mapDispatchToProps)
 )(ProfileContainer)

@@ -8,10 +8,10 @@ import {
   SetUserProfileAction,
   SetStatusAction,
   SetUserAvatarAction,
-  IPhotos,
+  IAvatar,
   IProfile,
   ProfileActions
-} from '../types/profile'
+} from '../types/reducers-types/profile'
 
 
 const initialState: ProfileState = {
@@ -59,7 +59,7 @@ const setUserProfile = (profile: IProfile): SetUserProfileAction => ({
   profile
 })
 const setStatus = (status: string): SetStatusAction => ({ type: ProfileActionTypes.SET_STATUS, status })
-const setUserAvatar = (userAvatar: IPhotos): SetUserAvatarAction => ({
+const setUserAvatar = (userAvatar: IAvatar): SetUserAvatarAction => ({
   type: ProfileActionTypes.SET_USER_AVATAR,
   userAvatar
 })
@@ -69,7 +69,7 @@ export const getUserProfile = (userId: number) => async (dispatch: AppDispatch) 
   const data = await profileAPI.getProfile(userId)
   dispatch(setUserProfile(data))
 }
-export const getStatus = (userId: string) => async (dispatch: AppDispatch) => {
+export const getStatus = (userId: number) => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getStatus(userId)
   dispatch(setStatus(data))
 }
@@ -90,7 +90,7 @@ export const updateStatus = (status: string): AppThunk => async (dispatch: AppDi
     dispatch(setStatus(status))
   }
 }
-export const postUserAvatar = (userAvatar: IPhotos): AppThunk => async (dispatch: AppDispatch) => {
+export const postUserAvatar = (userAvatar: File): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.postUserAvatar(userAvatar)
   if (data.resultCode === 0){
     dispatch(setUserAvatar(data.data.photos))

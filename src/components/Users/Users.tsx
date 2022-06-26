@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { IUser } from '../../types/users'
+import { IUser } from '../../types/reducers-types/users'
 import Paginator from '../common/Paginator/Paginator'
 import User from './User'
 // @ts-ignore

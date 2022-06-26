@@ -2,7 +2,7 @@ import {
   MessagesState,
   MessagesActionTypes,
   SendMessageAction,
-  MessagesActions, } from '../types/messages'
+  MessagesActions, } from '../types/reducers-types/messages'
 
 
 const initialState: MessagesState = {

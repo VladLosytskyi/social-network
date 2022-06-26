@@ -1,13 +1,15 @@
-import { authAPI, securityAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
+import { AppDispatch, AppThunk } from './store'
+import { authAPI, securityAPI } from '../api/api'
 import {
   AuthActions,
   AuthActionTypes,
   AuthState,
   SetAuthUserDataAction,
   SetCaptchaCaptchaUrlAction
-} from '../types/auth'
-import { AppDispatch, AppThunk } from './store'
+} from '../types/reducers-types/auth'
+import { ResultCodes } from '../types/api-types/api'
+import { CaptchaResultCode } from '../types/api-types/auth-api'
 
 
 const initialState: AuthState = {
@@ -46,17 +48,17 @@ export const setCaptchaUrl = (captchaUrl: string): SetCaptchaCaptchaUrlAction =>
 
 export const getAuthUserData = (): AppThunk => async (dispatch: AppDispatch) => {
   const data = await authAPI.me()
-  if (data.resultCode === 0){
+  if (data.resultCode === ResultCodes.Success){
     const { id, email, login } = data.data
     dispatch(setAuthUserData(id, email, login, true))
   }
 }
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk => async (dispatch) => {
   const data = await authAPI.login(email, password, rememberMe, captcha)
-  if (data.resultCode === 0){
+  if (data.resultCode === ResultCodes.Success){
     await dispatch(getAuthUserData())
   } else {
-    if (data.resultCode === 10){
+    if (data.resultCode === CaptchaResultCode.CaptchaIsRequired){
       await dispatch(getCaptchaUrl())
     }
     const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'

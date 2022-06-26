@@ -1,4 +1,4 @@
-import { IPhotos } from './profile'
+import { IAvatar } from './profile'
 
 export interface UsersState {
   users: IUser[]
@@ -60,7 +60,8 @@ export interface IUser {
   id: number
   name: string
   status: string
-  photos: IPhotos
+  photos: IAvatar
+  followed: boolean
 }
 
 export type UsersAction =

@@ -1,4 +1,4 @@
-import { AppActionsTypes, AppState, SetInitializeAction } from '../types/app'
+import { AppActionsTypes, AppState, SetInitializeAction } from '../types/reducers-types/app'
 import { getAuthUserData } from './auth-reducer'
 
 

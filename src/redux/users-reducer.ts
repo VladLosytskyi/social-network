@@ -10,7 +10,7 @@ import {
   SetCurrentPageAction,
   IUser,
   UsersAction
-} from '../types/users'
+} from '../types/reducers-types/users'
 import { usersAPI } from '../api/api'
 import { AppDispatch, AppThunk } from './store'
 

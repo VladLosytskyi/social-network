@@ -1,7 +1,12 @@
-interface IChat { name: string, nickname: string }
-interface IMessage { message: string }
+interface IChat {
+  name: string
+  nickname: string
+}
+interface IMessage {
+  message: string
+}
 export interface MessagesState {
-  chats: IChat[],
+  chats: IChat[]
   messages: IMessage[]
 }
 
@@ -10,7 +15,7 @@ export enum MessagesActionTypes {
 }
 
 export interface SendMessageAction {
-  type: MessagesActionTypes.SEND_MESSAGE,
+  type: MessagesActionTypes.SEND_MESSAGE
   newMessageText: string
 }
 

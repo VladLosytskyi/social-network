@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Users from './Users'
 import { RootState } from '../../redux/store'
-import { IUser } from '../../types/users'
+import { IUser } from '../../types/reducers-types/users'
 import Preloader from '../common/Preloader/Preloader'
 import {
   getUsersSelector,

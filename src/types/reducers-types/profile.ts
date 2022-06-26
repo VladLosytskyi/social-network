@@ -28,15 +28,15 @@ export interface SetStatusAction {
 
 export interface SetUserAvatarAction {
   type: ProfileActionTypes.SET_USER_AVATAR
-  userAvatar: IPhotos
+  userAvatar: IAvatar
 }
 
-export interface IPost {
+interface IPost {
   message: string
   likesCount: number
 }
 
-export interface IContacts {
+interface IContacts {
   github: string
   vk: string
   facebook: string
@@ -47,7 +47,7 @@ export interface IContacts {
   mainLink: string
 }
 
-export interface IPhotos {
+export interface IAvatar {
   small: string | null
   large: string | null
 }
@@ -58,7 +58,7 @@ export interface IProfile {
   lookingForAJobDescription: string
   fullName: string
   contacts: IContacts
-  photos: IPhotos
+  photos: IAvatar
 }
 
 export type ProfileActions =

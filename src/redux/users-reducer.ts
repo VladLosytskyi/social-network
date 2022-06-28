@@ -81,16 +81,22 @@ const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountAction =
   type: UsersActionTypes.SET_TOTAL_USERS_COUNT,
   totalUsersCount
 })
-const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAction => ({ type: UsersActionTypes.TOGGLE_IS_FETCHING, isFetching })
+const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAction => ({
+  type: UsersActionTypes.TOGGLE_IS_FETCHING,
+  isFetching
+})
 const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressAction => ({
   type: UsersActionTypes.TOGGLE_IS_FOLLOWING_PROGRESS,
   isFetching,
   userId
 })
-export const setCurrentPage = (currentPage: number): SetCurrentPageAction => ({ type: UsersActionTypes.SET_CURRENT_PAGE, currentPage })
+export const setCurrentPage = (currentPage: number): SetCurrentPageAction => ({
+  type: UsersActionTypes.SET_CURRENT_PAGE,
+  currentPage
+})
 
 
-export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: AppDispatch) => {
+export const getUsers = (currentPage: number, pageSize: number): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(toggleIsFetching(true))
   const data = await usersAPI.getUsers(currentPage, pageSize)
   dispatch(toggleIsFetching(false))

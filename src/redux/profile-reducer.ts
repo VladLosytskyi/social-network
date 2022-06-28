@@ -65,11 +65,11 @@ const setUserAvatar = (userAvatar: IAvatar): SetUserAvatarAction => ({
 })
 
 
-export const getUserProfile = (userId: number) => async (dispatch: AppDispatch) => {
+export const getUserProfile = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getProfile(userId)
   dispatch(setUserProfile(data))
 }
-export const getStatus = (userId: number) => async (dispatch: AppDispatch) => {
+export const getStatus = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getStatus(userId)
   dispatch(setStatus(data))
 }

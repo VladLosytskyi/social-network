@@ -1,4 +1,4 @@
-import { IAvatar } from './profile'
+import { IAvatar } from './profile-types'
 
 export interface UsersState {
   users: IUser[]

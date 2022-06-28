@@ -18,7 +18,7 @@ import {
   setCurrentPage,
   getUsers
 } from '../../redux/users-reducer'
-import { IUser } from '../../types/reducers-types/users'
+import { IUser } from '../../types/reducers-types/users-types'
 
 
 interface StateProps {

@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { IUser } from '../../types/reducers-types/users'
 import Paginator from '../common/Paginator/Paginator'
 import User from './User'
 // @ts-ignore
 import classes from './Users.module.css'
+import { IUser } from '../../types/reducers-types/users-types'
 
 interface UsersProps {
   totalUsersCount: number

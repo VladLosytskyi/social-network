@@ -1,4 +1,4 @@
-import { IUser } from '../reducers-types/users'
+import { IUser } from '../reducers-types/users-types'
 
 export interface GetUsersResponse {
   items: IUser[]

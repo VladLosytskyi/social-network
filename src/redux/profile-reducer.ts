@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form'
-import { profileAPI } from '../api/api'
 import { AppDispatch, AppThunk, RootState } from './store'
+import { profileAPI } from '../api/profile-api'
 import {
   ProfileState,
   ProfileActionTypes,
@@ -11,7 +11,7 @@ import {
   IAvatar,
   IProfile,
   ProfileActions
-} from '../types/reducers-types/profile'
+} from '../types/reducers-types/profile-types'
 
 
 const initialState: ProfileState = {

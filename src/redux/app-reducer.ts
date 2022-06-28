@@ -1,5 +1,5 @@
-import { AppActionsTypes, AppState, SetInitializeAction } from '../types/reducers-types/app'
 import { getAuthUserData } from './auth-reducer'
+import { AppActionsTypes, AppState, SetInitializeAction } from '../types/reducers-types/app-types'
 
 
 const initialState: AppState = {

@@ -1,3 +1,5 @@
+import { usersAPI } from '../api/users-api'
+import { AppDispatch, AppThunk } from './store'
 import {
   UsersState,
   UsersActionTypes,
@@ -10,9 +12,7 @@ import {
   SetCurrentPageAction,
   IUser,
   UsersAction
-} from '../types/reducers-types/users'
-import { usersAPI } from '../api/api'
-import { AppDispatch, AppThunk } from './store'
+} from '../types/reducers-types/users-types'
 
 
 const initialState: UsersState = {

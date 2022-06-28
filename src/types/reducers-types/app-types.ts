@@ -7,3 +7,5 @@ export enum AppActionsTypes {
 }
 
 export interface SetInitializeAction { type: AppActionsTypes.SET_INITIALIZE }
+
+export type AppActions = SetInitializeAction

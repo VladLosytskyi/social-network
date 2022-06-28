@@ -19,7 +19,7 @@ describe('ProfileStatus Component Test', () => {
     const component = create(<ProfileStatus status="Test" />)
     const root = component.root
     expect(() => {
-      const input = root.findByType('input')
+      root.findByType('input')
     }).toThrow()
   })
 
@@ -27,7 +27,7 @@ describe('ProfileStatus Component Test', () => {
     const mockCallback = jest.fn()
     const component = create(<ProfileStatus status="Test" updateStatus={ mockCallback } />)
     const instance = component.getInstance()
-    instance.deactivateEditMode()
+    instance.discardChanges()
     expect(mockCallback.mock.calls.length).toBe(1)
   })
 })

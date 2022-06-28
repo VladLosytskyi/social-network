@@ -1,6 +1,6 @@
 import { AppThunk } from './store'
 import { getAuthUserData } from './auth-reducer'
-import { AppActionsTypes, AppState, SetInitializeAction } from '../types/reducers-types/app-types'
+import { AppActions, AppActionsTypes, AppState, SetInitializeAction } from '../types/reducers-types/app-types'
 
 
 const initialState: AppState = {
@@ -8,7 +8,7 @@ const initialState: AppState = {
 }
 
 
-const appReducer = (state = initialState, action: any): AppState => {
+const appReducer = (state = initialState, action: AppActions): AppState => {
   switch (action.type) {
     case AppActionsTypes.SET_INITIALIZE: {
       return { ...state, initialized: true }

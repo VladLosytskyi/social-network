@@ -47,8 +47,7 @@ const ProfileStatus = props => {
           </div>
           : <div className={ classes.status }>
             <div>
-              <span className={ classes.blueText }>Status: </span>
-              <span>{ props.status || 'No status' }</span>
+              <span className={ classes.blueText }>Status: </span>{ props.status || 'No status' }
             </div>
             <button onClick={ activateEditMode } className={ classes.blueButton }>
               <span>Change Status</span>

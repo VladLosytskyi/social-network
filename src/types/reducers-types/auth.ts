@@ -25,7 +25,7 @@ export interface SetAuthUserDataAction {
 
 export interface SetCaptchaCaptchaUrlAction {
   type: AuthActionTypes.SET_CAPTCHA_URL
-  captchaUrl: string
+  captchaUrl: string | null
 }
 
 export type AuthActions = SetAuthUserDataAction | SetCaptchaCaptchaUrlAction

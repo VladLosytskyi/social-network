@@ -1,4 +1,6 @@
-import { Field, reduxForm } from 'redux-form'
+import { FC } from 'react'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+// @ts-ignore
 import classes from './Login.module.css'
 import { Input } from '../common/FormsControls/FormsControls'
 import { required, maxLengthCreator } from '../../utillities/validators/validators'
@@ -8,7 +10,24 @@ const validate = [
   maxLengthCreator(50)
 ]
 
-const LoginForm = ({ handleSubmit, captchaUrl, error }) => {
+interface LoginFormValues {
+  email: string
+  password: string
+  rememberMe: boolean
+  captcha: string | null
+}
+
+interface LoginFormOwnProps {
+  captchaUrl: string | null
+}
+
+type LoginFormProps = InjectedFormProps<LoginFormValues, LoginFormOwnProps> & LoginFormOwnProps
+
+const LoginForm: FC<LoginFormProps> = ({
+                                         handleSubmit,
+                                         error,
+                                         captchaUrl
+                                       }) => {
   return (
     <form onSubmit={ handleSubmit }>
       <div>
@@ -20,7 +39,8 @@ const LoginForm = ({ handleSubmit, captchaUrl, error }) => {
                className={ classes.input } />
       </div>
       <div className={ classes.mt10 }>
-        <Field component={ Input } name="password"
+        <Field component={ Input }
+               name="password"
                type="password"
                placeholder="Password"
                validate={ validate }
@@ -40,7 +60,7 @@ const LoginForm = ({ handleSubmit, captchaUrl, error }) => {
       }
 
       { captchaUrl &&
-        <div  className={ classes.captcha }>
+        <div className={ classes.captcha }>
           <img src={ captchaUrl } alt="Captcha" />
           <Field component={ Input }
                  name="captcha"
@@ -56,4 +76,4 @@ const LoginForm = ({ handleSubmit, captchaUrl, error }) => {
   )
 }
 
-export default reduxForm({ form: 'login' })(LoginForm)
+export default reduxForm<LoginFormValues, LoginFormOwnProps>({ form: 'login' })(LoginForm)

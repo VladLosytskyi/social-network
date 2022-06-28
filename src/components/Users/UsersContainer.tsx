@@ -3,7 +3,6 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Users from './Users'
 import { RootState } from '../../redux/store'
-import { IUser } from '../../types/reducers-types/users'
 import Preloader from '../common/Preloader/Preloader'
 import {
   getUsersSelector,
@@ -19,6 +18,7 @@ import {
   setCurrentPage,
   getUsers
 } from '../../redux/users-reducer'
+import { IUser } from '../../types/reducers-types/users'
 
 
 interface StateProps {
@@ -67,6 +67,7 @@ const UsersContainer: FC<UsersContainerProps> = (props) => {
   )
 }
 
+
 const mapStateToProps = (state: RootState) => ({
   users: getUsersSelector(state),
   pageSize: getPageSizeSelector(state),
@@ -75,7 +76,6 @@ const mapStateToProps = (state: RootState) => ({
   isFetching: getIsFetchingSelector(state),
   followingInProgress: getFollowingInProgressSelector(state)
 })
-
 const mapDispatchToProps = {
   follow,
   unfollow,
@@ -84,5 +84,5 @@ const mapDispatchToProps = {
 }
 
 export default compose(
-  connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps))
-(UsersContainer)
+  connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)
+)(UsersContainer)

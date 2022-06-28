@@ -53,7 +53,7 @@ export const getAuthUserData = (): AppThunk => async (dispatch: AppDispatch) => 
     dispatch(setAuthUserData(id, email, login, true))
   }
 }
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk => async (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null): AppThunk => async (dispatch) => {
   const data = await authAPI.login(email, password, rememberMe, captcha)
   if (data.resultCode === ResultCodes.Success){
     await dispatch(getAuthUserData())

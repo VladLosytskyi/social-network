@@ -1,27 +1,42 @@
-import React, { useEffect, Suspense } from 'react'
-import { compose } from 'redux'
-import { connect, Provider } from 'react-redux'
-import { HashRouter, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import store from './redux/store'
+import React, { FC, useEffect, Suspense } from 'react'
+import { connect } from 'react-redux'
+import { Route, Routes } from 'react-router-dom'
+// @ts-ignore
 import classes from './App.module.css'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Navbar from './components/Navbar/Navbar'
 import UsersContainer from './components/Users/UsersContainer'
 import Login from './components/Login/Login'
 import Preloader from './components/common/Preloader/Preloader'
-import { initializeApp } from './redux/app-reducer'
 import Welcome from './components/Welcome/Welcome'
+import { RootState } from './redux/store'
+import { initializeApp } from './redux/app-reducer'
+
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const MessagesContainer = React.lazy(() => import('./components/Messages/MessagesContainer'))
 
-const App = ({ initializeApp, initialized }) => {
+
+interface IMapStateToProps {
+  initialized: boolean
+}
+interface IMapDispatchToProps {
+  initializeApp: () => void
+}
+type AppProps = IMapStateToProps & IMapDispatchToProps
+
+
+const App: FC<AppProps> = ({ initializeApp, initialized }) => {
 
   useEffect(() => {
     initializeApp()
+    window.addEventListener('unhandledrejection', promiseRejectionEvent => alert(promiseRejectionEvent))
+    return () => {
+      window.removeEventListener('unhandledrejection', promiseRejectionEvent => alert(promiseRejectionEvent))
+    }
   }, [])
 
-  if (!initialized) {
+  if (!initialized){
     return (
       <div className={ classes.preloaderContainer }>
         <Preloader />
@@ -63,37 +78,11 @@ const App = ({ initializeApp, initialized }) => {
   )
 }
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation()
-    let navigate = useNavigate()
-    let params = useParams()
-    return (
-      <Component
-        { ...props }
-        router={ { location, navigate, params } }
-      />
-    )
-  }
 
-  return ComponentWithRouterProp
-}
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootState) => ({
   initialized: state.app.initialized
 })
 const mapDispatchToProps = { initializeApp }
 
-const AppWithRouter = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App)
 
-const AppContainer = () => {
-  return (
-    <HashRouter>
-      <Provider store={ store }>
-        <AppWithRouter />
-      </Provider>
-    </HashRouter>
-  )
-}
-
-export default AppContainer
+export default connect<IMapStateToProps, IMapDispatchToProps>(mapStateToProps, mapDispatchToProps)(App)

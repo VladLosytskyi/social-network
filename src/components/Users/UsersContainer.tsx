@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Users from './Users'
 import { RootState } from '../../redux/store'
@@ -21,7 +20,7 @@ import {
 import { IUser } from '../../types/reducers-types/users-types'
 
 
-interface StateProps {
+interface IMapStateToProps {
   users: IUser[]
   pageSize: number
   totalUsersCount: number
@@ -29,14 +28,14 @@ interface StateProps {
   isFetching: boolean
   followingInProgress: number[]
 }
-interface DispatchProps {
+interface IMapDispatchToProps {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
   setCurrentPage: (currentPage: number) => void
   getUsers: (currentPage: number, pageSize: number) => void
 }
 interface OwnProps {}
-type UsersContainerProps = StateProps & DispatchProps & OwnProps
+type UsersContainerProps = IMapStateToProps & IMapDispatchToProps & OwnProps
 
 const UsersContainer: FC<UsersContainerProps> = (props) => {
 
@@ -83,6 +82,4 @@ const mapDispatchToProps = {
   getUsers
 }
 
-export default compose(
-  connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)
-)(UsersContainer)
+export default connect<IMapStateToProps, IMapDispatchToProps, OwnProps>(mapStateToProps, mapDispatchToProps)(UsersContainer)

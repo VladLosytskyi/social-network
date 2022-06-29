@@ -1,4 +1,6 @@
-import { Field, reduxForm } from 'redux-form'
+import { FC } from 'react'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+// @ts-ignore
 import classes from './Messages.module.css'
 import { Textarea } from '../common/FormsControls/FormsControls'
 import { required, maxLengthCreator } from '../../utillities/validators/validators'
@@ -8,7 +10,13 @@ const validate = [
   maxLengthCreator(100)
 ]
 
-const AddMessageForm = ({ handleSubmit }) => {
+interface MessagesFormValues {
+  newMessageText: string
+}
+
+const MessagesForm: FC<InjectedFormProps<MessagesFormValues>> = ({
+                                                                   handleSubmit
+                                                                 }) => {
   return (
     <form onSubmit={ handleSubmit } className={ classes.addMessageForm }>
       <div>
@@ -25,4 +33,4 @@ const AddMessageForm = ({ handleSubmit }) => {
   )
 }
 
-export default reduxForm({form: "messagesAddMessageForm"})(AddMessageForm)
+export default reduxForm<MessagesFormValues>({ form: 'messagesAddMessageForm' })(MessagesForm)

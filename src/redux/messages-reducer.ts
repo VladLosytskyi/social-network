@@ -7,16 +7,16 @@ import {
 
 const initialState: MessagesState = {
   chats: [
-    { name: 'Andrew', nickname: '@Andrew' },
-    { name: 'Ivan', nickname: '@Ivan' },
-    { name: 'Sasha', nickname: '@Sasha' },
-    { name: 'Viktor', nickname: '@Viktor' },
-    { name: 'Valera', nickname: '@Valera' }
+    { id: 1, name: 'Andrew', nickname: '@Andrew' },
+    { id: 2, name: 'Ivan', nickname: '@Ivan' },
+    { id: 3, name: 'Sasha', nickname: '@Sasha' },
+    { id: 4, name: 'Viktor', nickname: '@Viktor' },
+    { id: 5, name: 'Valera', nickname: '@Valera' }
   ],
   messages: [
-    { message: 'Hi' },
-    { message: 'How are you?' },
-    { message: 'What do you plan to do today?' }
+    { id: 1, message: 'Hi' },
+    { id: 2, message: 'How are you?' },
+    { id: 3, message: 'What do you plan to do today?' }
   ]
 }
 
@@ -26,7 +26,7 @@ const messagesReducer = (state = initialState, action: MessagesActions): Message
     case MessagesActionTypes.SEND_MESSAGE:
       return {
         ...state,
-        messages: [...state.messages, { message: action.newMessageText }]
+        messages: [...state.messages, { id: 6, message: action.newMessageText }]
       }
     default:
       return state

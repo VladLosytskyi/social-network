@@ -1,8 +1,10 @@
 interface IChat {
+  id: number
   name: string
   nickname: string
 }
 interface IMessage {
+  id: number
   message: string
 }
 export interface MessagesState {

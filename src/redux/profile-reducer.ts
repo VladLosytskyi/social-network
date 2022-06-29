@@ -16,9 +16,9 @@ import {
 
 const initialState: ProfileState = {
   posts: [
-    { message: 'Hi, how are you?', likesCount: 12 },
-    { message: 'It\'s my second post', likesCount: 2 },
-    { message: 'First post', likesCount: 15 }
+    { id: 1, message: 'Hi, how are you?', likesCount: 12 },
+    { id: 2, message: 'It\'s my second post', likesCount: 2 },
+    { id: 3, message: 'First post', likesCount: 15 }
   ],
   profile: null,
   status: ''
@@ -29,6 +29,7 @@ const profileReducer = (state = initialState, action: ProfileActions): ProfileSt
   switch (action.type) {
     case ProfileActionTypes.ADD_POST: {
       let newPost = {
+        id: 4,
         message: action.newPostText,
         likesCount: 0
       }

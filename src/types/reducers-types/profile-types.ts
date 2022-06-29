@@ -32,6 +32,7 @@ export interface SetUserAvatarAction {
 }
 
 interface IPost {
+  id: number
   message: string
   likesCount: number
 }

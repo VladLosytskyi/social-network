@@ -1,3 +1,4 @@
+// @ts-ignore
 import preloader from '../../../assets/images/preloader.svg'
 
 const Preloader = () => {

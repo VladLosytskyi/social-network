@@ -1,6 +1,16 @@
+import { FC } from 'react'
+// @ts-ignore
 import classes from '../ProfileInfo.module.css'
+import { IProfile } from '../../../../types/reducers-types/profile-types'
 
-const ProfileData = ({ profile, isOwner, activateEditMode }) => {
+
+interface ProfileDataProps {
+  profile: IProfile
+  isOwner: boolean
+  activateEditMode: () => void
+}
+
+const ProfileData: FC<ProfileDataProps> = ({ profile, isOwner, activateEditMode }) => {
   return (
     <div className={ classes.profileData }>
       <div className={ classes.fieldsContainer }>
@@ -22,15 +32,17 @@ const ProfileData = ({ profile, isOwner, activateEditMode }) => {
           </div> }
         <div>
           <span className={ `${ classes.blueText } ${ classes.mr5 }` }>Contacts:</span>
-          { Object.keys(profile.contacts)
-            .filter(key => profile.contacts[key])
-            .map(key => {
-              return (
-                <div className={ classes.contact } key={ key }>
-                  <a href={ profile.contacts[key] } target="_blank">{ key }</a>
-                </div>
-              )
-            }) }
+          { Object.keys(profile.contacts).filter(key => profile.contacts[key]).length !== 0
+            ? Object.keys(profile.contacts)
+              .filter(key => profile.contacts[key])
+              .map(key => {
+                return (
+                  <div className={ classes.contact } key={ key }>
+                    <a href={ profile.contacts[key] } target="_blank">{ key }</a>
+                  </div>
+                )
+              })
+            : <>No Contacts</>}
         </div>
       </div>
       { isOwner &&

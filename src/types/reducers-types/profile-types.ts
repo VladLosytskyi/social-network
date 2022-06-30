@@ -31,13 +31,13 @@ export interface SetUserAvatarAction {
   userAvatar: IAvatar
 }
 
-interface IPost {
+export interface IPost {
   id: number
   message: string
   likesCount: number
 }
 
-interface IContacts {
+export interface IContacts {
   github: string
   vk: string
   facebook: string
@@ -58,6 +58,7 @@ export interface IProfile {
   lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string
+  aboutMe: string
   contacts: IContacts
   photos: IAvatar
 }

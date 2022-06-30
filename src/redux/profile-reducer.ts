@@ -12,6 +12,7 @@ import {
   IProfile,
   ProfileActions
 } from '../types/reducers-types/profile-types'
+import { ResultCodes } from '../types/api-types/api-types'
 
 
 const initialState: ProfileState = {
@@ -77,23 +78,23 @@ export const getStatus = (userId: number): AppThunk => async (dispatch: AppDispa
 export const updateProfile = (profile: IProfile): AppThunk => async (dispatch, getState: () => RootState) => {
   const userId = getState().auth.userId
   const data = await profileAPI.updateProfile(profile)
-  if (data.resultCode === 0){
+  if (data.resultCode === ResultCodes.Success){
     await dispatch(getUserProfile(userId))
   } else {
     const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
-    await dispatch(stopSubmit('edit-profile-data', { _error: message }))
+    await dispatch(stopSubmit('editProfileData', { _error: message }))
     return Promise.reject(message)
   }
 }
 export const updateStatus = (status: string): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.updateStatus(status)
-  if (data.resultCode === 0){
+  if (data.resultCode === ResultCodes.Success){
     dispatch(setStatus(status))
   }
 }
 export const postUserAvatar = (userAvatar: File): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.postUserAvatar(userAvatar)
-  if (data.resultCode === 0){
+  if (data.resultCode === ResultCodes.Success){
     dispatch(setUserAvatar(data.data.photos))
   }
 }

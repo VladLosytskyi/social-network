@@ -1,8 +1,18 @@
-import { Field, reduxForm } from 'redux-form'
+import { FC } from 'react'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+// @ts-ignore
 import classes from '../ProfileInfo.module.css'
 import { Input, Textarea } from '../../../common/FormsControls/FormsControls'
+import { IContacts, IProfile } from '../../../../types/reducers-types/profile-types'
 
-const ProfileDataForm = ({ contacts, discardChanges, handleSubmit, error }) => {
+interface ProfileDataFormOwnProps {
+  contacts: IContacts
+  discardChanges: () => void
+}
+
+type ProfileDataFormProps = InjectedFormProps<IProfile, ProfileDataFormOwnProps> & ProfileDataFormOwnProps
+
+const ProfileDataForm: FC<ProfileDataFormProps> = ({ contacts, discardChanges, handleSubmit, error }) => {
   return (
     <form className={ classes.profileData } onSubmit={ handleSubmit }>
       <div className={ classes.fieldsContainer }>
@@ -41,17 +51,17 @@ const ProfileDataForm = ({ contacts, discardChanges, handleSubmit, error }) => {
           <span className={ classes.blueText }>Contacts:</span>
           { Object.keys(contacts)
             .map(key => {
-                return (
-                  <div className={ classes.contact } key={ key }>
-                    <label className={ classes.blueText }>{ key }: </label>
-                    <Field component={ Input }
-                           name={ `contacts.${ key }` }
-                           id={ key }
-                           type="url"
-                           placeholder={ key }/>
-                  </div>
-                )
-              }) }
+              return (
+                <div className={ classes.contact } key={ key }>
+                  <label className={ classes.blueText }>{ key }: </label>
+                  <Field component={ Input }
+                         name={ `contacts.${ key }` }
+                         id={ key }
+                         type="url"
+                         placeholder={ key } />
+                </div>
+              )
+            }) }
         </div>
       </div>
       { error &&
@@ -71,4 +81,4 @@ const ProfileDataForm = ({ contacts, discardChanges, handleSubmit, error }) => {
   )
 }
 
-export default reduxForm({ form: 'edit-profile-data' })(ProfileDataForm)
+export default reduxForm<IProfile, ProfileDataFormOwnProps>({ form: 'editProfileData' })(ProfileDataForm)

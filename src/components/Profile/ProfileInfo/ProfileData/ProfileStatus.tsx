@@ -1,13 +1,21 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
+// @ts-ignore
 import classes from '../ProfileInfo.module.css'
 
-const ProfileStatus = props => {
+
+interface ProfileStatusProps {
+  initialStatus: string
+  updateStatus: (status: string) => void
+  isOwner: boolean
+}
+
+const ProfileStatus: FC<ProfileStatusProps> = ({ initialStatus, updateStatus, isOwner }) => {
   const [editMode, setEditMode] = useState(false)
-  const [status, setStatus] = useState(props.status)
+  const [status, setStatus] = useState(initialStatus)
 
   useEffect(() => {
-    setStatus(props.status)
-  }, [props.status])
+    setStatus(initialStatus)
+  }, [initialStatus])
 
   const activateEditMode = () => {
     setEditMode(true)
@@ -15,7 +23,7 @@ const ProfileStatus = props => {
 
   const saveChanges = () => {
     setEditMode(false)
-    props.updateStatus(status)
+    updateStatus(status)
   }
 
   const discardChanges = () => {
@@ -28,7 +36,7 @@ const ProfileStatus = props => {
 
   return (
     <div>
-      { props.isOwner
+      { isOwner
         ? <>{ editMode
           ? <div className={ classes.status }>
             <div>
@@ -47,7 +55,7 @@ const ProfileStatus = props => {
           </div>
           : <div className={ classes.status }>
             <div>
-              <span className={ classes.blueText }>Status: </span>{ props.status || 'No status' }
+              <span className={ classes.blueText }>Status: </span>{ status || 'No status' }
             </div>
             <button onClick={ activateEditMode } className={ classes.blueButton }>
               <span>Change Status</span>
@@ -57,7 +65,7 @@ const ProfileStatus = props => {
         : <div className={ classes.status }>
           <div>
             <span className={ classes.blueText }>Status: </span>
-            <span>{ props.status || 'No status' }</span>
+            <span>{ status || 'No status' }</span>
           </div>
         </div> }
     </div>

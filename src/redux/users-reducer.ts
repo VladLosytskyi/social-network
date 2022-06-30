@@ -1,6 +1,6 @@
 import { usersAPI } from '../api/users-api'
 import { AppDispatch, AppThunk } from './store'
-import { Response } from '../types/api-types/api-types'
+import { Response, ResultCodes } from '../types/api-types/api-types'
 import {
   UsersState,
   UsersActionTypes,
@@ -110,7 +110,7 @@ const followUnfollowFlow = async (dispatch: AppDispatch,
                                   actionCreator: (userId: number) => SetFollowAction | SetUnfollowAction) => {
   dispatch(toggleFollowingProgress(true, userId))
   const data = await apiMethod(userId)
-  if (data.resultCode === 0){
+  if (data.resultCode === ResultCodes.Success){
     dispatch(actionCreator(userId))
   }
   dispatch(toggleFollowingProgress(false, userId))

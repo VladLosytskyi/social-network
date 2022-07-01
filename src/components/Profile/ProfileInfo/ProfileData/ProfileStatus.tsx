@@ -57,9 +57,7 @@ const ProfileStatus: FC<ProfileStatusProps> = ({ initialStatus, updateStatus, is
             <div>
               <span className={ classes.blueText }>Status: </span>{ status || 'No status' }
             </div>
-            <button onClick={ activateEditMode } className={ classes.blueButton }>
-              <span>Change Status</span>
-            </button>
+            <button onClick={ activateEditMode } className={ classes.blueButton }>Change Status</button>
           </div>
         }</>
         : <div className={ classes.status }>

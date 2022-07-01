@@ -75,8 +75,8 @@ const usersReducer = (state = initialState, action: UsersAction): UsersState => 
 }
 
 
-const setFollow = (userId: number): SetFollowAction => ({ type: UsersActionTypes.FOLLOW, userId })
-const setUnfollow = (userId: number): SetUnfollowAction => ({ type: UsersActionTypes.UNFOLLOW, userId })
+export const setFollow = (userId: number): SetFollowAction => ({ type: UsersActionTypes.FOLLOW, userId })
+export const setUnfollow = (userId: number): SetUnfollowAction => ({ type: UsersActionTypes.UNFOLLOW, userId })
 const setUsers = (users: IUser[]): SetUsersAction => ({ type: UsersActionTypes.SET_USERS, users })
 const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountAction => ({
   type: UsersActionTypes.SET_TOTAL_USERS_COUNT,
@@ -86,7 +86,7 @@ const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAction => ({
   type: UsersActionTypes.TOGGLE_IS_FETCHING,
   isFetching
 })
-const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressAction => ({
+export const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressAction => ({
   type: UsersActionTypes.TOGGLE_IS_FOLLOWING_PROGRESS,
   isFetching,
   userId

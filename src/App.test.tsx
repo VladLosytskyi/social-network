@@ -1,5 +1,5 @@
-import * as ReactDOM from 'react-dom'
-import AppContainer from './App'
+import ReactDOM from 'react-dom'
+import AppContainer from './AppContainer'
 
 describe('App Component Test', () => {
   test('renders without crashing', () => {

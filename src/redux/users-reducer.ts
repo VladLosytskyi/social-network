@@ -2,17 +2,19 @@ import { usersAPI } from '../api/users-api'
 import { AppDispatch, AppThunk } from './store'
 import { Response, ResultCodes } from '../types/api-types/api-types'
 import {
-  UsersState,
-  UsersActionTypes,
+  IFilter,
+  IUser,
+  SetCurrentPageAction,
+  SetFilterAction,
   SetFollowAction,
+  SetTotalUsersCountAction,
   SetUnfollowAction,
   SetUsersAction,
-  SetTotalUsersCountAction,
-  ToggleIsFetchingAction,
   ToggleFollowingProgressAction,
-  SetCurrentPageAction,
-  IUser,
-  UsersAction
+  ToggleIsFetchingAction,
+  UsersAction,
+  UsersActionTypes,
+  UsersState
 } from '../types/reducers-types/users-types'
 
 
@@ -22,7 +24,11 @@ const initialState: UsersState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
-  followingInProgress: []
+  followingInProgress: [],
+  filter: {
+    term: '',
+    friend: null
+  }
 }
 
 
@@ -53,6 +59,9 @@ const usersReducer = (state = initialState, action: UsersAction): UsersState => 
     }
     case UsersActionTypes.SET_CURRENT_PAGE: {
       return { ...state, currentPage: action.currentPage }
+    }
+    case UsersActionTypes.SET_FILTER: {
+      return { ...state, filter: action.filter }
     }
     case UsersActionTypes.SET_TOTAL_USERS_COUNT: {
       return { ...state, totalUsersCount: action.totalUsersCount }
@@ -95,11 +104,17 @@ export const setCurrentPage = (currentPage: number): SetCurrentPageAction => ({
   type: UsersActionTypes.SET_CURRENT_PAGE,
   currentPage
 })
+export const setFilter = (filter: IFilter): SetFilterAction => ({
+  type: UsersActionTypes.SET_FILTER,
+  filter: filter
+})
 
 
-export const getUsers = (currentPage: number, pageSize: number): AppThunk => async (dispatch: AppDispatch) => {
+export const getUsers = (currentPage: number, pageSize: number, filter: IFilter): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(toggleIsFetching(true))
-  const data = await usersAPI.getUsers(currentPage, pageSize)
+  dispatch(setCurrentPage(currentPage))
+  dispatch(setFilter(filter))
+  const data = await usersAPI.getUsers(currentPage, pageSize, filter)
   dispatch(toggleIsFetching(false))
   dispatch(setUsers(data.items))
   dispatch(setTotalUsersCount(data.totalCount))

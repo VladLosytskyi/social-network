@@ -16,6 +16,7 @@ interface UsersProps {
 const Users: FC<UsersProps> = ({ user, follow, unfollow, followingInProgress }) => {
   return (
     <>
+      <div className={ classes.separator } />
       <div className={ classes.user }>
         <div className={ classes.userImage }>
           <NavLink to={ `/profile/${ user.id }` }>
@@ -45,7 +46,6 @@ const Users: FC<UsersProps> = ({ user, follow, unfollow, followingInProgress }) 
           <div>{ user.status }</div>
         </NavLink>
       </div>
-      <div className={ classes.separator } />
     </>
   )
 }

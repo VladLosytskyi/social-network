@@ -9,15 +9,14 @@ import {
   getTotalUsersCountSelector,
   getCurrentPageSelector,
   getIsFetchingSelector,
-  getFollowingInProgressSelector
+  getFollowingInProgressSelector, getFilter
 } from '../../redux/users-selectors'
 import {
   follow,
   unfollow,
-  setCurrentPage,
   getUsers
 } from '../../redux/users-reducer'
-import { IUser } from '../../types/reducers-types/users-types'
+import { IFilter, IUser } from '../../types/reducers-types/users-types'
 
 
 interface IMapStateToProps {
@@ -27,12 +26,12 @@ interface IMapStateToProps {
   currentPage: number
   isFetching: boolean
   followingInProgress: number[]
+  filter: IFilter
 }
 interface IMapDispatchToProps {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
-  setCurrentPage: (currentPage: number) => void
-  getUsers: (currentPage: number, pageSize: number) => void
+  getUsers: (currentPage: number, pageSize: number, filter: IFilter) => void
 }
 interface OwnProps {}
 type UsersContainerProps = IMapStateToProps & IMapDispatchToProps & OwnProps
@@ -41,12 +40,15 @@ type UsersContainerProps = IMapStateToProps & IMapDispatchToProps & OwnProps
 const UsersContainer: FC<UsersContainerProps> = (props) => {
 
   useEffect(() => {
-    props.getUsers(props.currentPage, props.pageSize)
+    props.getUsers(props.currentPage, props.pageSize, props.filter)
   }, [])
 
   const onPageChange = pageNumber => {
-    props.setCurrentPage(pageNumber)
-    props.getUsers(pageNumber, props.pageSize)
+    props.getUsers(pageNumber, props.pageSize, props.filter)
+  }
+
+  const onFilterChange = (filter: IFilter) => {
+    props.getUsers(1, props.pageSize, filter)
   }
 
   return (
@@ -61,6 +63,7 @@ const UsersContainer: FC<UsersContainerProps> = (props) => {
                  unfollow={ props.unfollow }
                  followingInProgress={ props.followingInProgress }
                  onPageChange={ onPageChange }
+                 onFilterChange={ onFilterChange }
         />
       }
     </>
@@ -74,12 +77,12 @@ const mapStateToProps = (state: RootState) => ({
   totalUsersCount: getTotalUsersCountSelector(state),
   currentPage: getCurrentPageSelector(state),
   isFetching: getIsFetchingSelector(state),
-  followingInProgress: getFollowingInProgressSelector(state)
+  followingInProgress: getFollowingInProgressSelector(state),
+  filter: getFilter(state)
 })
 const mapDispatchToProps = {
   follow,
   unfollow,
-  setCurrentPage,
   getUsers
 }
 

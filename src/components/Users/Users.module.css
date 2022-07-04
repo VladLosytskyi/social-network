@@ -1,13 +1,40 @@
 .users {
    display: flex;
    flex-direction: column;
+   justify-content: center;
+}
+
+.usersSearchFormContainer {
+   display: flex;
+   justify-content: center;
+}
+
+.usersSearchForm {
+   width: 700px;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 20px;
+   padding: 10px;
+   border: 1px solid #CCC;
+   border-radius: 10px;
+}
+
+.usersSearchForm select {
+   margin: 0 12px;
+}
+
+.usersContainer {
+   display: flex;
+   flex-direction: column;
 }
 
 .user {
    display: flex;
    align-items: center;
    max-width: 700px;
-   margin: 25px 20px;
+   margin: 25px auto;
    padding: 20px;
 }
 
@@ -25,6 +52,10 @@
    border-radius: 1px;
 }
 
+.separator:first-of-type {
+   margin-top: 50px;
+}
+
 .userImage {
    margin-right: 30px;
    text-align: center
@@ -34,7 +65,7 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   width: 100%;
+   width: 700px;
    border: 1px solid #CCC;
    border-radius: 10px;
    padding: 12px 20px;
@@ -50,10 +81,10 @@
    height: 100px;
    object-fit: cover;
    border-radius: 50%;
+   margin-bottom: 10px;
 }
 
 .blueButton {
-   margin-top: 10px;
    padding: 10px 20px;
    color: #fff;
    background-color: #61DAFB;
@@ -63,7 +94,6 @@
 }
 
 .whiteButton {
-   margin-top: 10px;
    padding: 10px 20px;
    color: #61DAFB;
    background-color: #fff;

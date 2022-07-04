@@ -2,7 +2,7 @@
    display: flex;
    justify-content: inherit;
    align-items: center;
-   margin: auto;
+   margin-bottom: 30px;
 }
 
 .pageNumbers {

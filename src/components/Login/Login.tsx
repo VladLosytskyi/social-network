@@ -1,27 +1,21 @@
 import { FC } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
-import { RootState } from '../../redux/store'
-import { login } from '../../redux/auth-reducer'
+import { loginThunk } from '../../redux/auth-reducer'
+import { getCaptchaUrlSelector, getIsAuthSelector } from '../../redux/auth-selectors'
 
 
-interface StateProps {
-  isAuth: boolean
-  captchaUrl: string | null
-}
+const Login: FC = () => {
 
-interface DispatchProps {
-  login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
-}
+  const isAuth = useSelector(getIsAuthSelector)
+  const captchaUrl = useSelector(getCaptchaUrlSelector)
 
-interface OwnProps {}
-type LoginProps = StateProps & DispatchProps & OwnProps
+  const dispatch = useDispatch()
 
 
-const Login: FC<LoginProps> = ({ login, isAuth, captchaUrl }) => {
   const onSubmit = formData => {
-    login(formData.email, formData.password, formData.rememberMe, formData.captcha)
+    dispatch(loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha))
   }
 
   if (isAuth){
@@ -36,10 +30,4 @@ const Login: FC<LoginProps> = ({ login, isAuth, captchaUrl }) => {
   )
 }
 
-const mapStateToProps = (state: RootState) => ({
-  isAuth: state.auth.isAuth,
-  captchaUrl: state.auth.captchaUrl
-})
-const mapDispatchToProps = { login }
-
-export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

@@ -1,5 +1,5 @@
 import { AppThunk } from './store'
-import { getAuthUserData } from './auth-reducer'
+import { getAuthUserDataThunk } from './auth-reducer'
 import { AppActions, AppActionsTypes, AppState, SetInitializeAction } from '../types/reducers-types/app-types'
 
 
@@ -24,7 +24,7 @@ export const setInitialize = (): SetInitializeAction => ({ type: AppActionsTypes
 
 
 export const initializeApp = (): AppThunk => async (dispatch) => {
-  await dispatch(getAuthUserData())
+  await dispatch(getAuthUserDataThunk())
   dispatch(setInitialize())
 }
 

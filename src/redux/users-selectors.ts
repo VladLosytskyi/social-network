@@ -24,6 +24,6 @@ export const getFollowingInProgressSelector = (state: RootState) => {
   return state.usersPage.followingInProgress
 }
 
-export const getFilter = (state: RootState) => {
+export const getFilterSelector = (state: RootState) => {
   return state.usersPage.filter
 }

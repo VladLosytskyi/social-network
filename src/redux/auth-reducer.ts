@@ -50,34 +50,34 @@ export const setCaptchaUrl = (captchaUrl: string): SetCaptchaCaptchaUrlAction =>
 })
 
 
-export const getAuthUserData = (): AppThunk => async (dispatch: AppDispatch) => {
+export const getAuthUserDataThunk = (): AppThunk => async (dispatch: AppDispatch) => {
   const data = await authAPI.me()
   if (data.resultCode === ResultCodes.Success){
     const { id, email, login } = data.data
     dispatch(setAuthUserData(id, email, login, true))
   }
 }
-export const login = (email: string,
-                      password: string,
-                      rememberMe: boolean,
-                      captcha: string | null): AppThunk => async (dispatch) => {
+export const loginThunk = (email: string,
+                           password: string,
+                           rememberMe: boolean,
+                           captcha: string | null): AppThunk => async (dispatch) => {
   const data = await authAPI.login(email, password, rememberMe, captcha)
   if (data.resultCode === ResultCodes.Success){
-    await dispatch(getAuthUserData())
+    await dispatch(getAuthUserDataThunk())
   } else {
     if (data.resultCode === CaptchaResultCode.CaptchaIsRequired){
-      await dispatch(getCaptchaUrl())
+      await dispatch(getCaptchaUrlThunk())
     }
     const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
-    await dispatch(stopSubmit('login', { _error: message }))
+    await dispatch(stopSubmit('loginThunk', { _error: message }))
   }
 }
-export const getCaptchaUrl = (): AppThunk => async (dispatch: AppDispatch) => {
+export const getCaptchaUrlThunk = (): AppThunk => async (dispatch: AppDispatch) => {
   const data = await securityAPI.getCaptchaUrl()
   const captchaUrl = data.url
   dispatch(setCaptchaUrl(captchaUrl))
 }
-export const logout = (): AppThunk => async (dispatch: AppDispatch) => {
+export const logoutThunk = (): AppThunk => async (dispatch: AppDispatch) => {
   const data = await authAPI.logout()
   if (data.resultCode === ResultCodes.Success){
     dispatch(setAuthUserData(null, null, null, false))

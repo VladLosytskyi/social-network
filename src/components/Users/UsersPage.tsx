@@ -8,7 +8,7 @@ import User from './User'
 import UsersSearchForm from './UsersSearchForm'
 import { followThunk, getUsersThunk, unfollowThunk } from '../../redux/users-reducer'
 import {
-  getCurrentPageSelector, getFilter,
+  getCurrentPageSelector, getFilterSelector,
   getFollowingInProgressSelector,
   getIsFetchingSelector,
   getPageSizeSelector,
@@ -22,7 +22,7 @@ const UsersPage: FC = () => {
 
   const users = useSelector(getUsersSelector)
   const pageSize = useSelector(getPageSizeSelector)
-  const filter = useSelector(getFilter)
+  const filter = useSelector(getFilterSelector)
   const totalUsersCount = useSelector(getTotalUsersCountSelector)
   const currentPage = useSelector(getCurrentPageSelector)
   const isFetching = useSelector(getIsFetchingSelector)

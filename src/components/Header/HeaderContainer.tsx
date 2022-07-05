@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
 import { RootState } from '../../redux/store'
-import { getAuthUserData, logout } from '../../redux/auth-reducer'
+import { getAuthUserDataThunk, logoutThunk } from '../../redux/auth-reducer'
 
 
 interface IMapStateToProps {
@@ -31,6 +31,6 @@ const mapStateToProps = (state: RootState) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login
 })
-const mapDispatchToProps = { getAuthUserData, logout }
+const mapDispatchToProps = { getAuthUserData: getAuthUserDataThunk, logout: logoutThunk }
 
 export default connect<IMapStateToProps, IMapDispatchToProps>(mapStateToProps, mapDispatchToProps)(HeaderContainer)

@@ -9,7 +9,7 @@
 
 .profileInfo {
    height: min-content;
-   width: 300px;
+   width: 350px;
    margin-right: 50px;
    display: flex;
    flex-direction: column;
@@ -95,7 +95,7 @@ input[type=file] {
 }
 
 .contact input {
-   height: 15px;
+   height: 20px;
    font-size: 14px;
    padding-top: 0;
    margin-bottom: 15px;

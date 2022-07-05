@@ -45,7 +45,6 @@ input[type=password]:focus {
 
 input[type=checkbox] {
    cursor: pointer;
-
 }
 
 input:-webkit-autofill {

@@ -1,4 +1,4 @@
-import usersReducer, { follow, setFollow, setUnfollow, toggleFollowingProgress, unfollow } from './users-reducer'
+import usersReducer, { followThunk, setFollow, setUnfollow, toggleFollowingProgress, unfollowThunk } from './users-reducer'
 import { UsersState } from '../types/reducers-types/users-types'
 import { usersAPI } from '../api/users-api'
 import { Response, ResultCodes } from '../types/api-types/api-types'
@@ -12,7 +12,7 @@ const result: Response = {
   data: {}
 }
 
-describe('Users Reducer Test', () => {
+describe('UsersPage Reducer Test', () => {
   describe('Action Creator Tests', () => {
     let state: UsersState
 
@@ -75,10 +75,10 @@ describe('Users Reducer Test', () => {
       usersAPIMock.unfollow.mockClear()
     })
 
-    test('follow test', async () => {
+    test('followThunk test', async () => {
       usersAPIMock.follow.mockReturnValue(Promise.resolve(result))
 
-      const thunk = follow(1)
+      const thunk = followThunk(1)
 
       await thunk(dispatchMock, getStateMock, {})
 
@@ -87,10 +87,10 @@ describe('Users Reducer Test', () => {
       expect(dispatchMock).toHaveBeenNthCalledWith(2, setFollow(1))
       expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 1))
     })
-    test('unfollow test', async () => {
+    test('unfollowThunk test', async () => {
       usersAPIMock.unfollow.mockReturnValue(Promise.resolve(result))
 
-      const thunk = unfollow(1)
+      const thunk = unfollowThunk(1)
 
       await thunk(dispatchMock, getStateMock, {})
 

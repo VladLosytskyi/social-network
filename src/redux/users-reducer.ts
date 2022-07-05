@@ -110,7 +110,7 @@ export const setFilter = (filter: IFilter): SetFilterAction => ({
 })
 
 
-export const getUsers = (currentPage: number, pageSize: number, filter: IFilter): AppThunk => async (dispatch: AppDispatch) => {
+export const getUsersThunk = (currentPage: number, pageSize: number, filter: IFilter): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(toggleIsFetching(true))
   dispatch(setCurrentPage(currentPage))
   dispatch(setFilter(filter))
@@ -130,10 +130,10 @@ const followUnfollowFlow = async (dispatch: AppDispatch,
   }
   dispatch(toggleFollowingProgress(false, userId))
 }
-export const follow = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
+export const followThunk = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
   await followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), setFollow)
 }
-export const unfollow = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
+export const unfollowThunk = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
   await followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), setUnfollow)
 }
 

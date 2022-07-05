@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import classes from './App.module.css'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Navbar from './components/Navbar/Navbar'
-import UsersContainer from './components/Users/UsersContainer'
+import UsersPage from './components/Users/UsersPage'
 import Login from './components/Login/Login'
 import Preloader from './components/common/Preloader/Preloader'
 import Welcome from './components/Welcome/Welcome'
@@ -65,7 +65,7 @@ const App: FC<AppProps> = ({ initializeApp, initialized }) => {
                      element={ <MessagesContainer /> }
               />
               <Route path="/users/"
-                     element={ <UsersContainer /> }
+                     element={ <UsersPage /> }
               />
               <Route path="/login"
                      element={ <Login /> }

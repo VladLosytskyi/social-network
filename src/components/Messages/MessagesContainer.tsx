@@ -5,10 +5,10 @@ import Messages from './Messages'
 import { RootState } from '../../redux/store'
 import { sendMessage } from '../../redux/messages-reducer'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-import { MessagesState } from '../../types/reducers-types/messages-types'
+import { IMessagesState } from '../../types/reducers-types/messages-types'
 
 interface IMapStateToProps {
-    messagesPage: MessagesState
+    messagesPage: IMessagesState
 }
 interface IMapDispatchToProps {
     sendMessage: (newMessageText: string) => void

@@ -4,21 +4,21 @@ import { Response, ResultCodes } from '../types/api-types/api-types'
 import {
   IFilter,
   IUser,
-  SetCurrentPageAction,
-  SetFilterAction,
-  SetFollowAction,
-  SetTotalUsersCountAction,
-  SetUnfollowAction,
-  SetUsersAction,
-  ToggleFollowingProgressAction,
-  ToggleIsFetchingAction,
+  ISetCurrentPageAC,
+  ISetFilterAC,
+  ISetFollowAC,
+  ISetTotalUsersCountAC,
+  ISetUnfollowAC,
+  ISetUsersAC,
+  TToggleFollowingProgressAC,
+  IToggleIsFetchingAC,
   UsersAction,
   UsersActionTypes,
-  UsersState
+  IUsersState
 } from '../types/reducers-types/users-types'
 
 
-const initialState: UsersState = {
+const initialState: IUsersState = {
   users: [],
   pageSize: 10,
   totalUsersCount: 0,
@@ -32,7 +32,7 @@ const initialState: UsersState = {
 }
 
 
-const usersReducer = (state = initialState, action: UsersAction): UsersState => {
+const usersReducer = (state = initialState, action: UsersAction): IUsersState => {
   switch (action.type) {
     case UsersActionTypes.FOLLOW:
       return {
@@ -84,27 +84,27 @@ const usersReducer = (state = initialState, action: UsersAction): UsersState => 
 }
 
 
-export const setFollow = (userId: number): SetFollowAction => ({ type: UsersActionTypes.FOLLOW, userId })
-export const setUnfollow = (userId: number): SetUnfollowAction => ({ type: UsersActionTypes.UNFOLLOW, userId })
-const setUsers = (users: IUser[]): SetUsersAction => ({ type: UsersActionTypes.SET_USERS, users })
-const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountAction => ({
+export const setFollow = (userId: number): ISetFollowAC => ({ type: UsersActionTypes.FOLLOW, userId })
+export const setUnfollow = (userId: number): ISetUnfollowAC => ({ type: UsersActionTypes.UNFOLLOW, userId })
+const setUsers = (users: IUser[]): ISetUsersAC => ({ type: UsersActionTypes.SET_USERS, users })
+const setTotalUsersCount = (totalUsersCount: number): ISetTotalUsersCountAC => ({
   type: UsersActionTypes.SET_TOTAL_USERS_COUNT,
   totalUsersCount
 })
-const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAction => ({
+const toggleIsFetching = (isFetching: boolean): IToggleIsFetchingAC => ({
   type: UsersActionTypes.TOGGLE_IS_FETCHING,
   isFetching
 })
-export const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressAction => ({
+export const toggleFollowingProgress = (isFetching: boolean, userId: number): TToggleFollowingProgressAC => ({
   type: UsersActionTypes.TOGGLE_IS_FOLLOWING_PROGRESS,
   isFetching,
   userId
 })
-export const setCurrentPage = (currentPage: number): SetCurrentPageAction => ({
+export const setCurrentPage = (currentPage: number): ISetCurrentPageAC => ({
   type: UsersActionTypes.SET_CURRENT_PAGE,
   currentPage
 })
-export const setFilter = (filter: IFilter): SetFilterAction => ({
+export const setFilter = (filter: IFilter): ISetFilterAC => ({
   type: UsersActionTypes.SET_FILTER,
   filter: filter
 })
@@ -122,7 +122,7 @@ export const getUsersThunk = (currentPage: number, pageSize: number, filter: IFi
 const followUnfollowFlow = async (dispatch: AppDispatch,
                                   userId: number,
                                   apiMethod: (userId: number) => Promise<Response>,
-                                  actionCreator: (userId: number) => SetFollowAction | SetUnfollowAction) => {
+                                  actionCreator: (userId: number) => ISetFollowAC | ISetUnfollowAC) => {
   dispatch(toggleFollowingProgress(true, userId))
   const data = await apiMethod(userId)
   if (data.resultCode === ResultCodes.Success){

@@ -4,10 +4,10 @@ import classes from './Messages.module.css'
 import Chats from './Chats/Chats'
 import Message from './Message/Message'
 import MessagesForm from './MessagesForm'
-import { MessagesState } from '../../types/reducers-types/messages-types'
+import { IMessagesState } from '../../types/reducers-types/messages-types'
 
 interface MessagesProps {
-  messagesPage: MessagesState
+  messagesPage: IMessagesState
   sendMessage: (newMessageText: string) => void
 }
 

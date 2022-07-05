@@ -1,10 +1,10 @@
-import profileReducer, { addPost } from './profile-reducer'
-import { ProfileState } from '../types/reducers-types/profile-types'
+import profileReducer, { addPostAC } from './profile-reducer'
+import { IProfileState } from '../types/reducers-types/profile-types'
 
 
-describe('Profile Reducer Test', () => {
+describe('ProfilePage Reducer Test', () => {
 
-  let state: ProfileState
+  let state: IProfileState
 
   beforeEach(() => {
     state = {
@@ -20,16 +20,16 @@ describe('Profile Reducer Test', () => {
 
   test('length of posts should be incremented', () => {
     // 1. Test data
-    let action = addPost('Hello World')
+    let action = addPostAC('Hello World')
     // 2. Action
-    let newState: ProfileState = profileReducer(state, action)
+    let newState: IProfileState = profileReducer(state, action)
     // 3. Expectation
     expect(newState.posts.length).toBe(4)
   })
 
   test('text of new post should be correct', () => {
-    let action = addPost('Hello World')
-    let newState: ProfileState = profileReducer(state, action)
+    let action = addPostAC('Hello World')
+    let newState: IProfileState = profileReducer(state, action)
     expect(newState.posts[3].message).toBe('Hello World')
   })
 })

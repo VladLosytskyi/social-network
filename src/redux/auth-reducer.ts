@@ -5,15 +5,15 @@ import { securityAPI } from '../api/security-api'
 import {
   AuthActions,
   AuthActionTypes,
-  AuthState,
-  SetAuthUserDataAction,
-  SetCaptchaCaptchaUrlAction
+  IAuthState,
+  ISetAuthUserDataAC,
+  ISetCaptchaCaptchaUrlAC
 } from '../types/reducers-types/auth-types'
 import { ResultCodes } from '../types/api-types/api-types'
 import { CaptchaResultCode } from '../types/api-types/auth-api-types'
 
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
   userId: null,
   email: null,
   login: null,
@@ -22,10 +22,10 @@ const initialState: AuthState = {
 }
 
 
-const authReducer = (state = initialState, action: AuthActions): AuthState => {
+const authReducer = (state = initialState, action: AuthActions): IAuthState => {
   switch (action.type) {
     case AuthActionTypes.SET_AUTH_USER_DATA: {
-      return { ...state, ...action.payload }
+      return { ...state, ...action.userData }
     }
     case AuthActionTypes.SET_CAPTCHA_URL: {
       return { ...state, captchaUrl: action.captchaUrl }
@@ -40,11 +40,11 @@ const authReducer = (state = initialState, action: AuthActions): AuthState => {
 export const setAuthUserData = (userId: number | null,
                                 email: string | null,
                                 login: string | null,
-                                isAuth: boolean): SetAuthUserDataAction => ({
+                                isAuth: boolean): ISetAuthUserDataAC => ({
   type: AuthActionTypes.SET_AUTH_USER_DATA,
-  payload: { userId, email, login, isAuth }
+  userData: { userId, email, login, isAuth }
 })
-export const setCaptchaUrl = (captchaUrl: string): SetCaptchaCaptchaUrlAction => ({
+export const setCaptchaUrl = (captchaUrl: string): ISetCaptchaCaptchaUrlAC => ({
   type: AuthActionTypes.SET_CAPTCHA_URL,
   captchaUrl
 })

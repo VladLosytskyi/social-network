@@ -28,12 +28,11 @@ const UsersPage: FC = () => {
   const isFetching = useSelector(getIsFetchingSelector)
   const followingInProgress = useSelector(getFollowingInProgressSelector)
 
-  const dispatch = useDispatch()
 
+  const dispatch = useDispatch()
   const follow = (userId: number) => {
     dispatch(followThunk(userId))
   }
-
   const unfollow = (userId: number) => {
     dispatch(unfollowThunk(userId))
   }

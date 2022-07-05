@@ -1,4 +1,4 @@
-export interface AuthState {
+export interface IAuthState {
   userId: number | null
   email: string | null
   login: string | null
@@ -11,21 +11,21 @@ export enum AuthActionTypes {
   SET_CAPTCHA_URL = 'SET_CAPTCHA_URL'
 }
 
-interface SetAuthUserDataActionPayload {
+interface IUserData {
   userId: number | null
   email: string | null
   login: string | null
   isAuth: boolean
 }
 
-export interface SetAuthUserDataAction {
+export interface ISetAuthUserDataAC {
   type: AuthActionTypes.SET_AUTH_USER_DATA
-  payload: SetAuthUserDataActionPayload
+  userData: IUserData
 }
 
-export interface SetCaptchaCaptchaUrlAction {
+export interface ISetCaptchaCaptchaUrlAC {
   type: AuthActionTypes.SET_CAPTCHA_URL
   captchaUrl: string | null
 }
 
-export type AuthActions = SetAuthUserDataAction | SetCaptchaCaptchaUrlAction
+export type AuthActions = ISetAuthUserDataAC | ISetCaptchaCaptchaUrlAC

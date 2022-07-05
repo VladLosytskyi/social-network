@@ -2,12 +2,12 @@ import { stopSubmit } from 'redux-form'
 import { AppDispatch, AppThunk, RootState } from './store'
 import { profileAPI } from '../api/profile-api'
 import {
-  ProfileState,
+  IProfileState,
   ProfileActionTypes,
-  AddPostAction,
-  SetUserProfileAction,
-  SetStatusAction,
-  SetUserAvatarAction,
+  IAddPostAC,
+  ISetUserProfileAC,
+  ISetStatusAC,
+  ISetUserAvatarAC,
   IAvatar,
   IProfile,
   ProfileActions
@@ -15,7 +15,7 @@ import {
 import { ResultCodes } from '../types/api-types/api-types'
 
 
-const initialState: ProfileState = {
+const initialState: IProfileState = {
   posts: [
     { id: 1, message: 'Hi, how are you?', likesCount: 12 },
     { id: 2, message: 'It\'s my second post', likesCount: 2 },
@@ -26,7 +26,7 @@ const initialState: ProfileState = {
 }
 
 
-const profileReducer = (state = initialState, action: ProfileActions): ProfileState => {
+const profileReducer = (state = initialState, action: ProfileActions): IProfileState => {
   switch (action.type) {
     case ProfileActionTypes.ADD_POST: {
       let newPost = {
@@ -55,47 +55,47 @@ const profileReducer = (state = initialState, action: ProfileActions): ProfileSt
 }
 
 
-export const addPost = (newPostText: string): AddPostAction => ({ type: ProfileActionTypes.ADD_POST, newPostText })
-const setUserProfile = (profile: IProfile): SetUserProfileAction => ({
+export const addPostAC = (newPostText: string): IAddPostAC => ({ type: ProfileActionTypes.ADD_POST, newPostText })
+const setUserProfileAC = (profile: IProfile): ISetUserProfileAC => ({
   type: ProfileActionTypes.SET_USER_PROFILE,
   profile
 })
-const setStatus = (status: string): SetStatusAction => ({ type: ProfileActionTypes.SET_STATUS, status })
-const setUserAvatar = (userAvatar: IAvatar): SetUserAvatarAction => ({
+const setStatusAC = (status: string): ISetStatusAC => ({ type: ProfileActionTypes.SET_STATUS, status })
+const setUserAvatarAC = (userAvatar: IAvatar): ISetUserAvatarAC => ({
   type: ProfileActionTypes.SET_USER_AVATAR,
   userAvatar
 })
 
 
-export const getUserProfile = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
+export const getUserProfileThunk = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getProfile(userId)
-  dispatch(setUserProfile(data))
+  dispatch(setUserProfileAC(data))
 }
-export const getStatus = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
+export const getStatusThunk = (userId: number): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.getStatus(userId)
-  dispatch(setStatus(data))
+  dispatch(setStatusAC(data))
 }
-export const updateProfile = (profile: IProfile): AppThunk => async (dispatch, getState: () => RootState) => {
+export const updateProfileThunk = (profile: IProfile): AppThunk => async (dispatch, getState: () => RootState) => {
   const userId = getState().auth.userId
   const data = await profileAPI.updateProfile(profile)
   if (data.resultCode === ResultCodes.Success){
-    await dispatch(getUserProfile(userId))
+    await dispatch(getUserProfileThunk(userId))
   } else {
     const message = data.messages.length > 0 ? data.messages[0] : 'Something went wrong. Try again later.'
     await dispatch(stopSubmit('editProfileData', { _error: message }))
     return Promise.reject(message)
   }
 }
-export const updateStatus = (status: string): AppThunk => async (dispatch: AppDispatch) => {
+export const updateStatusThunk = (status: string): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.updateStatus(status)
   if (data.resultCode === ResultCodes.Success){
-    dispatch(setStatus(status))
+    dispatch(setStatusAC(status))
   }
 }
-export const postUserAvatar = (userAvatar: File): AppThunk => async (dispatch: AppDispatch) => {
+export const postUserAvatarThunk = (userAvatar: File): AppThunk => async (dispatch: AppDispatch) => {
   const data = await profileAPI.postUserAvatar(userAvatar)
   if (data.resultCode === ResultCodes.Success){
-    dispatch(setUserAvatar(data.data.photos))
+    dispatch(setUserAvatarAC(data.data.photos))
   }
 }
 

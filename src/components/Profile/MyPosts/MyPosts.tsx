@@ -1,24 +1,28 @@
 import React, { FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 // @ts-ignore
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 import MyPostsForm from './MyPostsForm'
-import { IPost } from '../../../types/reducers-types/profile-types'
+import { addPostAC } from '../../../redux/profile-reducer'
+import { getAvatarSelector, getPostsSelector } from '../../../redux/profile-selectors'
 
-interface MyPostsProps {
-  posts: IPost[]
-  addPost: (newPostText: string) => void
-}
 
-const MyPosts: FC<MyPostsProps> = React.memo(props => {
-  const postsElements =
-    [...props.posts]
-      .reverse()
-      .map(post => <Post message={ post.message } likesCount={ post.likesCount } key={ post.id } />)
+const MyPosts: FC = React.memo(() => {
 
+  const posts = useSelector(getPostsSelector)
+  const avatar = useSelector(getAvatarSelector)
+
+
+  const dispatch = useDispatch()
   const addPost = values => {
-    props.addPost(values.newPostText)
+    dispatch(addPostAC(values.newPostText))
   }
+
+  const postsElements =
+    [...posts]
+      .reverse()
+      .map(post => <Post avatar={ avatar } message={ post.message } likesCount={ post.likesCount } key={ post.id } />)
 
   return (
     <div className={ classes.postsBlock }>

@@ -1,11 +1,11 @@
 import {
-  MessagesState,
+  IMessagesState,
   MessagesActionTypes,
-  SendMessageAction,
+  ISendMessageAC,
   MessagesActions, } from '../types/reducers-types/messages-types'
 
 
-const initialState: MessagesState = {
+const initialState: IMessagesState = {
   chats: [
     { id: 1, name: 'Andrew', nickname: '@Andrew' },
     { id: 2, name: 'Ivan', nickname: '@Ivan' },
@@ -21,7 +21,7 @@ const initialState: MessagesState = {
 }
 
 
-const messagesReducer = (state = initialState, action: MessagesActions): MessagesState => {
+const messagesReducer = (state = initialState, action: MessagesActions): IMessagesState => {
   switch (action.type) {
     case MessagesActionTypes.SEND_MESSAGE:
       return {
@@ -34,7 +34,7 @@ const messagesReducer = (state = initialState, action: MessagesActions): Message
 }
 
 
-export const sendMessage = (newMessageText: string): SendMessageAction => ({
+export const sendMessage = (newMessageText: string): ISendMessageAC => ({
   type: MessagesActionTypes.SEND_MESSAGE,
   newMessageText
 })

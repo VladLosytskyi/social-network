@@ -13,7 +13,7 @@ import { RootState } from './redux/store'
 import { initializeApp } from './redux/app-reducer'
 
 
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const ProfilePage = React.lazy(() => import('./components/Profile/ProfilePage'))
 const MessagesContainer = React.lazy(() => import('./components/Messages/MessagesContainer'))
 
 
@@ -56,10 +56,10 @@ const App: FC<AppProps> = ({ initializeApp, initialized }) => {
                      element={ <Welcome /> }
               />
               <Route path="/profile"
-                     element={ <ProfileContainer /> }
+                     element={ <ProfilePage /> }
               />
               <Route path="/profile/:userId"
-                     element={ <ProfileContainer /> }
+                     element={ <ProfilePage /> }
               />
               <Route path="/messages/*"
                      element={ <MessagesContainer /> }

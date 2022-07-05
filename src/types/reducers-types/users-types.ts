@@ -1,6 +1,6 @@
 import { IAvatar } from './profile-types'
 
-export interface UsersState {
+export interface IUsersState {
   users: IUser[]
   pageSize: number
   totalUsersCount: number
@@ -21,43 +21,43 @@ export enum UsersActionTypes {
   TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 }
 
-export interface SetFollowAction {
+export interface ISetFollowAC {
   type: UsersActionTypes.FOLLOW
   userId: number
 }
 
-export interface SetUnfollowAction {
+export interface ISetUnfollowAC {
   type: UsersActionTypes.UNFOLLOW
   userId: number
 }
 
-export interface SetUsersAction {
+export interface ISetUsersAC {
   type: UsersActionTypes.SET_USERS
   users: IUser[]
 }
 
-export interface SetTotalUsersCountAction {
+export interface ISetTotalUsersCountAC {
   type: UsersActionTypes.SET_TOTAL_USERS_COUNT
   totalUsersCount: number
 }
 
-export interface ToggleIsFetchingAction {
+export interface IToggleIsFetchingAC {
   type: UsersActionTypes.TOGGLE_IS_FETCHING
   isFetching: boolean
 }
 
-export interface ToggleFollowingProgressAction {
+export interface TToggleFollowingProgressAC {
   type: UsersActionTypes.TOGGLE_IS_FOLLOWING_PROGRESS
   isFetching: boolean
   userId: number
 }
 
-export interface SetCurrentPageAction {
+export interface ISetCurrentPageAC {
   type: UsersActionTypes.SET_CURRENT_PAGE
   currentPage: number
 }
 
-export interface SetFilterAction {
+export interface ISetFilterAC {
   type: UsersActionTypes.SET_FILTER
   filter: IFilter
 }
@@ -76,11 +76,11 @@ export interface IFilter {
 }
 
 export type UsersAction =
-  SetFollowAction
-  | SetUnfollowAction
-  | SetUsersAction
-  | SetTotalUsersCountAction
-  | ToggleIsFetchingAction
-  | ToggleFollowingProgressAction
-  | SetCurrentPageAction
-  | SetFilterAction
+  ISetFollowAC
+  | ISetUnfollowAC
+  | ISetUsersAC
+  | ISetTotalUsersCountAC
+  | IToggleIsFetchingAC
+  | TToggleFollowingProgressAC
+  | ISetCurrentPageAC
+  | ISetFilterAC

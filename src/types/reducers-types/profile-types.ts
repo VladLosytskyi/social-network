@@ -1,4 +1,4 @@
-export interface ProfileState {
+export interface IProfileState {
   posts: IPost[]
   profile: null | IProfile
   status: string
@@ -11,22 +11,22 @@ export enum ProfileActionTypes {
   SET_USER_AVATAR = 'SET_USER_AVATAR'
 }
 
-export interface AddPostAction {
+export interface IAddPostAC {
   type: ProfileActionTypes.ADD_POST
   newPostText: string
 }
 
-export interface SetUserProfileAction {
+export interface ISetUserProfileAC {
   type: ProfileActionTypes.SET_USER_PROFILE
   profile: IProfile
 }
 
-export interface SetStatusAction {
+export interface ISetStatusAC {
   type: ProfileActionTypes.SET_STATUS
   status: string
 }
 
-export interface SetUserAvatarAction {
+export interface ISetUserAvatarAC {
   type: ProfileActionTypes.SET_USER_AVATAR
   userAvatar: IAvatar
 }
@@ -64,7 +64,7 @@ export interface IProfile {
 }
 
 export type ProfileActions =
-  AddPostAction
-  | SetUserProfileAction
-  | SetStatusAction
-  | SetUserAvatarAction
+  IAddPostAC
+  | ISetUserProfileAC
+  | ISetStatusAC
+  | ISetUserAvatarAC

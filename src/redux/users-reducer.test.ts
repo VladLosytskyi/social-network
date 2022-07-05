@@ -1,5 +1,5 @@
 import usersReducer, { followThunk, setFollow, setUnfollow, toggleFollowingProgress, unfollowThunk } from './users-reducer'
-import { UsersState } from '../types/reducers-types/users-types'
+import { IUsersState } from '../types/reducers-types/users-types'
 import { usersAPI } from '../api/users-api'
 import { Response, ResultCodes } from '../types/api-types/api-types'
 
@@ -14,7 +14,7 @@ const result: Response = {
 
 describe('UsersPage Reducer Test', () => {
   describe('Action Creator Tests', () => {
-    let state: UsersState
+    let state: IUsersState
 
     beforeEach(() => {
       state = {
@@ -50,14 +50,14 @@ describe('UsersPage Reducer Test', () => {
 
 
     test('setFollow test', () => {
-      const newState: UsersState = usersReducer(state, setFollow(1))
+      const newState: IUsersState = usersReducer(state, setFollow(1))
 
       expect(newState.users[0].followed).toBeFalsy()
       expect(newState.users[1].followed).toBeTruthy()
     })
 
     test('setUnfollow test', () => {
-      const newState: UsersState = usersReducer(state, setUnfollow(3))
+      const newState: IUsersState = usersReducer(state, setUnfollow(3))
 
       expect(newState.users[2].followed).toBeTruthy()
       expect(newState.users[3].followed).toBeFalsy()

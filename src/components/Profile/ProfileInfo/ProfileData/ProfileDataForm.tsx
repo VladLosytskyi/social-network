@@ -53,7 +53,7 @@ const ProfileDataForm: FC<ProfileDataFormProps> = ({ contacts, discardChanges, h
             .map(key => {
               return (
                 <div className={ classes.contact } key={ key }>
-                  <label className={ classes.blueText }>{ key }: </label>
+                  <label className={ classes.blueText } htmlFor={ key }>{ key }: </label>
                   <Field component={ Input }
                          name={ `contacts.${ key }` }
                          id={ key }

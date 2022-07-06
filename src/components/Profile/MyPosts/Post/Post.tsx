@@ -17,7 +17,7 @@ const Post: FC<PostProps> = ({ avatar, message, likesCount }) => {
     <div className={ classes.post }>
       <img
         className={ classes.profileImage }
-        src={ avatar ? avatar.small : userAvatar }
+        src={ avatar?.small || userAvatar }
         alt="Profile avatar"
       />
       <div>

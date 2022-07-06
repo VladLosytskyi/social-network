@@ -75,6 +75,12 @@ export interface IFilter {
   friend: null | boolean
 }
 
+export interface IUsersQueryParams {
+  term?: string
+  friend?: string
+  page?: string
+}
+
 export type UsersAction =
   ISetFollowAC
   | ISetUnfollowAC

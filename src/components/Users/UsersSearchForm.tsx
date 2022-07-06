@@ -7,21 +7,22 @@ import { IFilter } from '../../types/reducers-types/users-types'
 const validate = () => {}
 
 interface UsersSearchFormProps {
+  filter: IFilter
   onFilterChange: (filter: IFilter) => void
 }
 
-const UsersSearchForm: FC<UsersSearchFormProps> = React.memo(({ onFilterChange }) => {
+const UsersSearchForm: FC<UsersSearchFormProps> = React.memo(({ filter, onFilterChange }) => {
   const submit = (values, { setSubmitting }) => {
-    const filter: IFilter = {
+    const filterValues: IFilter = {
       term: values.term,
       friend: values.friend === 'null' ? null : values.friend === 'true'
     }
-    onFilterChange(filter)
+    onFilterChange(filterValues)
     setSubmitting(true)
   }
 
   return (
-    <Formik initialValues={ { term: '', friend: 'null' } } validate={ validate } onSubmit={ submit }>
+    <Formik initialValues={ filter } validate={ validate } onSubmit={ submit }>
       { ({ isSubmitting }) => (
         <Form className={ classes.usersSearchForm }>
           <Field type="text" name="term" placeholder="Find User" />

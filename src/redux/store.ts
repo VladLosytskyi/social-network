@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form'
 import appReducer from './app-reducer'
 import profileReducer from './profile-reducer'
 import messagesReducer from './messages-reducer'
+import chatReducer from './chat-reducer'
 import usersReducer from './users-reducer'
 import sidebarReducer from './sidebar-reducer'
 import authReducer from './auth-reducer'
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   app: appReducer,
   profilePage: profileReducer,
   messagesPage: messagesReducer,
+  chatPage: chatReducer,
   usersPage: usersReducer,
   sidebar: sidebarReducer,
   auth: authReducer,

@@ -1,7 +1,9 @@
+import { FC } from 'react'
+// @ts-ignore
 import classes from './Welcome.module.css'
 import { NavLink } from 'react-router-dom'
 
-const Welcome = () => {
+const Welcome: FC = () => {
   return (
     <section className={ classes.welcome }>
       <h1>Welcome to my 1st <a className={ classes.blueText }
@@ -16,9 +18,8 @@ const Welcome = () => {
                                                     href="https://social-network.samuraijs.com/signUp"
                                                     target="_blanc">API's Website</a> to register.
         </p>
-        <p>After registration, please close the sign up tab and go on <NavLink to="/login"
-                                                                               className={ classes.blueText }>Login
-          Page</NavLink> and login there.</p>
+        <p>After registration, please return on <NavLink to="/login" className={ classes.blueText }>Login Page</NavLink>
+          of this web application and login here.</p>
         <p>Then the functionality of the site will be available to you as a registered user.</p>
         <p>I am sorry for the inconvenience.</p>
       </div>

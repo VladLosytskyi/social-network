@@ -1,8 +1,9 @@
 import {
   IMessagesState,
-  MessagesActionTypes,
   ISendMessageAC,
-  MessagesActions, } from '../types/reducers-types/messages-types'
+  MessagesActions,
+  MessagesActionTypes,
+} from '../types/reducers-types/messages-types'
 
 
 const initialState: IMessagesState = {

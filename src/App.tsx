@@ -1,9 +1,9 @@
-import React, { FC, useEffect, Suspense } from 'react'
+import React, { FC, Suspense, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 // @ts-ignore
 import classes from './App.module.css'
-import HeaderContainer from './components/Header/HeaderContainer'
+import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 import UsersPage from './components/Users/UsersPage'
 import Login from './components/Login/Login'
@@ -15,14 +15,17 @@ import { initializeApp } from './redux/app-reducer'
 
 const ProfilePage = React.lazy(() => import('./components/Profile/ProfilePage'))
 const MessagesContainer = React.lazy(() => import('./components/Messages/MessagesContainer'))
+const ChatPage = React.lazy(() => import('./components/Chat/ChatPage'))
 
 
 interface IMapStateToProps {
   initialized: boolean
 }
+
 interface IMapDispatchToProps {
   initializeApp: () => void
 }
+
 type AppProps = IMapStateToProps & IMapDispatchToProps
 
 
@@ -46,9 +49,11 @@ const App: FC<AppProps> = ({ initializeApp, initialized }) => {
 
   return (
     <div className={ classes.appWrapper }>
-      <HeaderContainer />
+      <Header />
       <div className={ classes.appWrapperMain }>
-        <Navbar />
+        <div>
+          <Navbar />
+        </div>
         <div className={ classes.appWrapperContainer }>
           <Suspense fallback={ <Preloader /> }>
             <Routes>
@@ -63,6 +68,9 @@ const App: FC<AppProps> = ({ initializeApp, initialized }) => {
               />
               <Route path="/messages/*"
                      element={ <MessagesContainer /> }
+              />
+              <Route path="/chat"
+                     element={ <ChatPage /> }
               />
               <Route path="/users/"
                      element={ <UsersPage /> }

@@ -12,7 +12,6 @@ interface PostProps {
 }
 
 const Post: FC<PostProps> = ({ avatar, message, likesCount }) => {
-  debugger
   return (
     <div className={ classes.post }>
       <img

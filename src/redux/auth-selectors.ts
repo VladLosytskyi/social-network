@@ -11,3 +11,7 @@ export const getCaptchaUrlSelector = (state: RootState) => {
 export const getAuthorisedUserIdSelector = (state: RootState) => {
   return state.auth.userId
 }
+
+export const getLoginSelector = (state: RootState) => {
+  return state.auth.login
+}

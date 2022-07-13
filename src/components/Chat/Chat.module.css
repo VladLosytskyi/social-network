@@ -1,0 +1,94 @@
+.chatPage {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.messages {
+   display: flex;
+   flex-direction: column;
+   overflow-y: auto;
+   height: 70vh;
+   width: 708px;
+   margin-left: 4px;
+   padding: 10px 0;
+   border-radius: 15px;
+   background: linear-gradient(#61dafb, #fafafa);
+}
+
+/*Message*/
+.message {
+   display: flex;
+   flex-direction: row;
+   padding: 0 12px 6px;
+}
+
+.avatar {
+   display: flex;
+   align-items: flex-end;
+}
+
+.avatar img {
+   height: 40px;
+   width: 40px;
+   border-radius: 50%;
+   transition: border-radius .5s ease;
+}
+
+.avatar img:hover {
+   border-radius: inherit;
+}
+
+.body {
+   height: 100%;
+   background-color: #efefef;
+   display: flex;
+   flex-direction: column;
+   margin: 0 23px 0 10px;
+   border-radius: 10px 10px 10px 0;
+}
+
+.userName {
+   padding: 6px 13px 0;
+   font-size: 13px;
+   font-weight: 500;
+   color: #61dafb;
+}
+
+
+.addMessageFormContainer {
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.addMessageForm {
+   display: flex;
+   align-items: flex-end;
+}
+
+.addMessageForm textarea {
+   width: 300px;
+   margin-right: 10px;
+}
+
+.blueButton {
+   padding: 10px 20px;
+   color: #fff;
+   background-color: #61DAFB;
+   border: 1px solid #61DAFB;
+   border-radius: 20px;
+   cursor: pointer;
+}
+
+.blueButton:disabled {
+   color: #bebebe;
+   background-color: #3D92A6;
+   border: 1px solid #45A4BBFF;
+}
+
+.error {
+   text-align: center;
+   color: #ff3759;
+}

@@ -47,11 +47,8 @@ const App: FC<AppProps> = ({ initializeApp, initialized }) => {
     )
   }
 
-  return !initialized
-    ? <div className={ classes.preloaderContainer }>
-      <Preloader />
-    </div>
-    : <div className={ classes.appWrapper }>
+  return (
+    <div className={ classes.appWrapper }>
       <Header />
       <div className={ classes.appWrapperMain }>
         <div>
@@ -86,6 +83,7 @@ const App: FC<AppProps> = ({ initializeApp, initialized }) => {
         </div>
       </div>
     </div>
+  )
 }
 
 

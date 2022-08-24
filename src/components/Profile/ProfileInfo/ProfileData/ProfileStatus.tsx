@@ -37,7 +37,7 @@ const ProfileStatus: FC<ProfileStatusProps> = ({ initialStatus, updateStatus, is
   return (
     <div>
       { isOwner
-        ? <>{ editMode
+        ? editMode
           ? <div className={ classes.status }>
             <div>
               <span className={ classes.blueText }>Status:</span>
@@ -55,15 +55,14 @@ const ProfileStatus: FC<ProfileStatusProps> = ({ initialStatus, updateStatus, is
           </div>
           : <div className={ classes.status }>
             <div>
-              <span className={ classes.blueText }>Status: </span>{ status || 'No status' }
+              <span className={ classes.blueText }>Status: </span>{ initialStatus || 'No status' }
             </div>
             <button onClick={ activateEditMode } className={ classes.blueButton }>Change Status</button>
           </div>
-        }</>
         : <div className={ classes.status }>
           <div>
             <span className={ classes.blueText }>Status: </span>
-            <span>{ status || 'No status' }</span>
+            <span>{ initialStatus || 'No status' }</span>
           </div>
         </div> }
     </div>

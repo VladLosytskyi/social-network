@@ -29,7 +29,7 @@ const ChatPage: FC = () => {
   }, [])
 
   useEffect(() => {
-    if (isAutoScrollActive) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    isAutoScrollActive && messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   return (

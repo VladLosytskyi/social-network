@@ -51,9 +51,11 @@ const UsersPage: FC = () => {
     const parsedFriend = params.get('friend')
 
     const actualPage = parsedPage ? +parsedPage : currentPage
-    const actualFilter = parsedTerm ? { ...filter, term: parsedTerm } :
-      parsedFriend ? { ...filter, friend: parsedFriend === 'null' ? null : parsedFriend === 'true' } :
-        filter
+    const actualFilter = parsedTerm
+      ? { ...filter, term: parsedTerm }
+      : parsedFriend
+        ? { ...filter, friend: parsedFriend === 'null' ? null : parsedFriend === 'true' }
+        : filter
 
     dispatch(getUsersThunk(actualPage, pageSize, actualFilter))
   }, [])
